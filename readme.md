@@ -1,10 +1,10 @@
 # BloomChain Landing Page
 
-A professional, interactive landing page for BloomChain - the revolutionary Web3 gardening game built on the Internet Computer Protocol for WCHL 2025.
+A professional, interactive landing page for BloomChain - the revolutionary Web3 gardening game built on the Internet Computer Protocol for WCHL 2025. This landing page serves as a wishlist signup platform while the game is in development.
 
 ## 🌟 Features
 
-- **Interactive 3D Garden Scene**: Built with Three.js and React Three Fiber
+- **Immersive 3D Background**: Floating Web3 elements with Three.js and React Three Fiber
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
 - **Modern Animations**: Smooth transitions and micro-interactions
 - **Email Wishlist Signup**: Form validation with React Hook Form and Zod
@@ -78,10 +78,10 @@ npm run preview
 bloomchain-landing/
 ├── src/
 │   ├── components/
-│   │   ├── 3D/
-│   │   │   └── GardenScene.tsx      # Three.js 3D garden
+│   │   ├── BackgroundScene.tsx      # Three.js floating Web3 elements
+│   │   ├── GlobalBackground.tsx     # Full-page 3D background wrapper
 │   │   ├── Navigation.tsx           # Header navigation
-│   │   ├── Hero.tsx                 # Hero section with 3D scene
+│   │   ├── Hero.tsx                 # Hero section with pixel art
 │   │   ├── Features.tsx             # Game features showcase
 │   │   ├── GameMechanics.tsx        # Gameplay explanation
 │   │   ├── Web3Features.tsx         # Blockchain integration
@@ -100,15 +100,15 @@ bloomchain-landing/
 ## 🎯 Key Sections
 
 ### 1. Hero Section
-- **3D Interactive Garden**: Rotating 4x4 grid with animated crops and sprinklers
+- **Pixel Art Aesthetic**: 2D style matching the game's visual design
 - **Compelling Headlines**: "Grow. Earn. Own." with gradient text effects
-- **Call-to-Action**: Prominent wishlist signup and demo buttons
-- **Key Stats**: Earning potential, ownership benefits, and gameplay features
+- **Call-to-Action**: "Learn Gameplay" and "Join Wishlist" buttons
+- **Development Progress**: Coming August 2025 with feature highlights
 
 ### 2. Features Overview
-- **6 Core Features**: NFT assets, play-to-earn, puzzles, DAO, offline growth, events
+- **6 Core Features**: NFT assets, play-to-earn, puzzles, DAO (coming soon), offline growth, events
 - **Interactive Cards**: Hover effects and color-coded categories
-- **Benefit Highlighting**: Clear value propositions for each feature
+- **Smart Navigation**: "Learn More" goes to Gameplay, "Join Wishlist" goes to Newsletter
 
 ### 3. Game Mechanics
 - **Visual Grid Demo**: Interactive 4x4 garden representation
@@ -117,14 +117,24 @@ bloomchain-landing/
 
 ### 4. Web3 Integration
 - **ICP Benefits**: Transaction speed, cost comparison, eco-friendliness
-- **Blockchain Features**: NFTs, play-to-earn, DAO governance, Internet Identity
+- **Blockchain Features**: NFTs, play-to-earn, DAO governance (at launch), Internet Identity
 - **Technical Advantages**: Performance stats and user benefits
 
-### 5. Newsletter Signup
+### 5. Development Roadmap
+- **3-Month Timeline**: August to October 2025
+- **Clear Milestones**: MVP Development, Beta Launch, Public Release
+- **Transparent Progress**: Monthly feature rollouts and updates
+
+### 6. Newsletter Signup
 - **Form Validation**: Email validation with error handling
 - **Success Animation**: Smooth transition to thank you state
 - **Benefits List**: Clear value proposition for joining
 - **Privacy Assurance**: GDPR-compliant messaging
+
+### 7. Footer
+- **Essential Links Only**: Quick navigation and legal links
+- **Social Media**: Platform links and contact information
+- **Clean Design**: Streamlined without community/resources sections (until launch)
 
 ## 🎨 Custom Animations
 
@@ -142,10 +152,11 @@ bloomchain-landing/
 ```
 
 ### Three.js Animations
-- **Crop Rotation**: Subtle rotating movement for visual interest
-- **Particle Systems**: Animated water droplets from sprinklers
-- **Floating Objects**: Magical sparkles throughout the garden
-- **Auto-Rotation**: Gentle camera movement for dynamic viewing
+- **Floating Gems**: Rotating Web3-themed gems with multiple colors
+- **Blockchain Blocks**: Animated cubes representing blockchain technology
+- **Particle Systems**: Dynamic particle fields for ambient atmosphere
+- **Connection Lines**: Animated lines connecting blockchain elements
+- **Ambient Rotation**: Gentle scene rotation for visual depth
 
 ## 📱 Responsive Design
 
@@ -181,7 +192,9 @@ theme: {
 ### Updating Content
 - **Hero Text**: Edit `Hero.tsx` headlines and descriptions
 - **Features**: Modify the features array in `Features.tsx`
+- **Roadmap**: Update timeline and milestones in `Roadmap.tsx`
 - **Team Info**: Update team member data in `Team.tsx`
+- **Background Elements**: Customize 3D elements in `BackgroundScene.tsx`
 
 ## 🚀 Deployment
 
@@ -232,7 +245,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Project**: BloomChain
 - **Competition**: WCHL 2025 Fully On-Chain Track
-- **Deadline**: July 21, 2025
+- **Development Timeline**: August - October 2025
+- **Current Status**: Landing page and wishlist phase
 
 ---
 
