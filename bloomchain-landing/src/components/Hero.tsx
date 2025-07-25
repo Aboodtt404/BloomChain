@@ -1,8 +1,5 @@
-import React, { Suspense } from 'react'
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Environment, Float } from '@react-three/drei'
+import React from 'react'
 import { Play, ArrowDown, Sparkles, Coins, Users } from 'lucide-react'
-import GardenScene from './3D/GardenScene'
 
 const Hero: React.FC = () => {
   const scrollToFeatures = () => {
@@ -21,8 +18,8 @@ const Hero: React.FC = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900" />
+      {/* Background Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/60 via-slate-900/40 to-gray-900/60" />
       
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -110,41 +107,57 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column - 3D Garden Scene */}
+          {/* Right Column - Pixel Art Showcase */}
           <div className="relative h-96 lg:h-[600px] rounded-2xl overflow-hidden bg-gradient-to-br from-earth-900/50 to-web3-900/50 border border-gray-700">
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10" />
             
-            {/* 3D Canvas */}
-            <Canvas
-              camera={{ position: [0, 8, 8], fov: 50 }}
-              className="w-full h-full"
-            >
-              <Suspense fallback={null}>
-                <Environment preset="sunset" />
-                <OrbitControls 
-                  enablePan={false} 
-                  enableZoom={false} 
-                  enableRotate={true}
-                  autoRotate={true}
-                  autoRotateSpeed={0.5}
-                  minPolarAngle={Math.PI / 6}
-                  maxPolarAngle={Math.PI / 2.5}
-                />
-                <GardenScene />
-              </Suspense>
-            </Canvas>
+            {/* Pixel Art Background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-earth-800/20 to-web3-800/20">
+              {/* Grid Pattern */}
+              <div className="absolute inset-0 opacity-30" style={{
+                backgroundImage: `
+                  linear-gradient(rgba(76, 175, 80, 0.3) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(76, 175, 80, 0.3) 1px, transparent 1px)
+                `,
+                backgroundSize: '32px 32px'
+              }} />
+              
+              {/* Floating Pixel Elements */}
+              <div className="absolute top-16 left-16 w-8 h-8 bg-earth-400 animate-float pixel-art opacity-80"></div>
+              <div className="absolute top-32 right-20 w-6 h-6 bg-golden-400 animate-float pixel-art opacity-70" style={{ animationDelay: '1s' }}></div>
+              <div className="absolute bottom-32 left-20 w-10 h-10 bg-web3-400 animate-float pixel-art opacity-60" style={{ animationDelay: '2s' }}></div>
+              <div className="absolute bottom-20 right-16 w-4 h-4 bg-accent-400 animate-float pixel-art opacity-90" style={{ animationDelay: '0.5s' }}></div>
+              
+              {/* Glowing Orbs */}
+              <div className="absolute top-24 right-32 w-12 h-12 bg-earth-500/30 rounded-full blur-sm animate-pulse"></div>
+              <div className="absolute bottom-40 left-32 w-16 h-16 bg-golden-500/20 rounded-full blur-md animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+              
+              {/* Central Focus Area */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <div className="relative">
+                  {/* Main Gem */}
+                  <div className="w-24 h-24 bg-gradient-to-br from-earth-400 to-earth-600 transform rotate-45 animate-glow pixel-art shadow-glow-green"></div>
+                  
+                  {/* Surrounding Elements */}
+                  <div className="absolute -top-8 -left-8 w-6 h-6 bg-golden-400 pixel-art animate-bounce"></div>
+                  <div className="absolute -top-8 -right-8 w-6 h-6 bg-web3-400 pixel-art animate-bounce" style={{ animationDelay: '0.5s' }}></div>
+                  <div className="absolute -bottom-8 -left-8 w-6 h-6 bg-accent-400 pixel-art animate-bounce" style={{ animationDelay: '1s' }}></div>
+                  <div className="absolute -bottom-8 -right-8 w-6 h-6 bg-earth-300 pixel-art animate-bounce" style={{ animationDelay: '1.5s' }}></div>
+                </div>
+              </div>
+            </div>
 
-            {/* 3D Scene Overlay Info */}
+            {/* Game Info Overlay */}
             <div className="absolute bottom-4 left-4 right-4 z-20">
               <div className="bg-black/60 backdrop-blur-sm rounded-lg p-4 border border-gray-600">
                 <div className="flex items-center justify-between text-sm">
                   <div className="text-earth-300">
-                    <span className="font-semibold">Live Garden</span>
-                    <div className="text-xs text-gray-400">Interactive 3D Preview</div>
+                    <span className="font-semibold">Pixel Art Style</span>
+                    <div className="text-xs text-gray-400">2D Top-Down Garden Game</div>
                   </div>
                   <div className="text-right">
-                    <div className="text-golden-300 font-semibold">16 Crops Growing</div>
-                    <div className="text-xs text-gray-400">+47 Gems/hour</div>
+                    <div className="text-golden-300 font-semibold">4x4 Grid System</div>
+                    <div className="text-xs text-gray-400">64x64 Pixel Tiles</div>
                   </div>
                 </div>
               </div>
@@ -153,7 +166,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
           <button 
             onClick={scrollToFeatures}
             className="text-gray-400 hover:text-earth-400 transition-colors duration-200"
