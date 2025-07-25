@@ -7,8 +7,8 @@ import { Mail, Check, AlertCircle, Sparkles, Gift } from 'lucide-react'
 // Validation schema
 const newsletterSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
-  notifications: z.boolean().default(true),
-  updates: z.boolean().default(true),
+  notifications: z.boolean(),
+  updates: z.boolean(),
 })
 
 type NewsletterFormData = z.infer<typeof newsletterSchema>
@@ -24,6 +24,10 @@ const Newsletter: React.FC = () => {
     reset,
   } = useForm<NewsletterFormData>({
     resolver: zodResolver(newsletterSchema),
+    defaultValues: {
+      notifications: true,
+      updates: true,
+    },
   })
 
   const onSubmit = async (data: NewsletterFormData) => {
@@ -133,7 +137,7 @@ const Newsletter: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-tl from-web3-500/10 to-accent-500/10 rounded-3xl blur-2xl transform -rotate-3" />
             
             <div className="relative bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-3xl p-8">
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              <form onSubmit={handleSubmit(onSubmit as any)} className="space-y-6">
                 {/* Email Input */}
                 <div className="space-y-2">
                   <label htmlFor="email" className="block text-sm font-medium text-gray-300">

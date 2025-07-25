@@ -1,6 +1,6 @@
 import React, { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Float, Sphere, Box, Octahedron } from '@react-three/drei'
+import { Float } from '@react-three/drei'
 import * as THREE from 'three'
 
 // Floating Gem Component
@@ -106,15 +106,11 @@ const ParticleField: React.FC = () => {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={200}
-          array={particles.positions}
-          itemSize={3}
+          args={[particles.positions, 3]}
         />
         <bufferAttribute
           attach="attributes-color"
-          count={200}
-          array={particles.colors}
-          itemSize={3}
+          args={[particles.colors, 3]}
         />
       </bufferGeometry>
       <pointsMaterial 
@@ -171,15 +167,11 @@ const ConnectionLines: React.FC = () => {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={lineGeometry.points.length}
-          array={new Float32Array(lineGeometry.points.flatMap(p => [p.x, p.y, p.z]))}
-          itemSize={3}
+          args={[new Float32Array(lineGeometry.points.flatMap(p => [p.x, p.y, p.z])), 3]}
         />
         <bufferAttribute
           attach="attributes-color"
-          count={lineGeometry.colors.length}
-          array={new Float32Array(lineGeometry.colors.flatMap(c => [c.r, c.g, c.b]))}
-          itemSize={3}
+          args={[new Float32Array(lineGeometry.colors.flatMap(c => [c.r, c.g, c.b])), 3]}
         />
       </bufferGeometry>
       <lineBasicMaterial transparent opacity={0.3} vertexColors />
