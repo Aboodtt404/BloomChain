@@ -83,7 +83,7 @@ const Hero: React.FC = () => {
               </button>
               <button 
                 onClick={() => {
-                  const element = document.querySelector('#game-mechanics')
+                  const element = document.querySelector('#gameplay')
                   if (element) {
                     element.scrollIntoView({ behavior: 'smooth' })
                   }

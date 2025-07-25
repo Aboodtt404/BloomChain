@@ -12,21 +12,7 @@ const Footer: React.FC = () => {
     { label: 'Team', href: '#team' },
   ]
 
-  const resources = [
-    { label: 'Documentation', href: '#', external: true },
-    { label: 'API Reference', href: '#', external: true },
-    { label: 'Smart Contracts', href: '#', external: true },
-    { label: 'Github', href: '#', external: true },
-    { label: 'WCHL 2025', href: '#', external: true },
-  ]
 
-  const community = [
-    { label: 'Discord', href: '#', external: true },
-    { label: 'Telegram', href: '#', external: true },
-    { label: 'Reddit', href: '#', external: true },
-    { label: 'YouTube', href: '#', external: true },
-    { label: 'Blog', href: '#', external: true },
-  ]
 
   const legal = [
     { label: 'Privacy Policy', href: '#' },
@@ -48,7 +34,7 @@ const Footer: React.FC = () => {
     <footer className="bg-gray-900 border-t border-gray-800">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-5 gap-8">
+        <div className="grid lg:grid-cols-3 gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-2 space-y-6">
             {/* Logo */}
@@ -125,48 +111,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Resources */}
-          <div className="space-y-6">
-            <h4 className="text-lg font-semibold text-white">Resources</h4>
-            <ul className="space-y-3">
-              {resources.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    className="text-gray-400 hover:text-earth-400 transition-colors duration-200 flex items-center space-x-1"
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noopener noreferrer" : undefined}
-                  >
-                    <span>{link.label}</span>
-                    {link.external && <ExternalLink className="w-3 h-3" />}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
 
-          {/* Community & Legal */}
-          <div className="space-y-8">
-            {/* Community */}
-            <div className="space-y-6">
-              <h4 className="text-lg font-semibold text-white">Community</h4>
-              <ul className="space-y-3">
-                {community.map((link, index) => (
-                  <li key={index}>
-                    <a
-                      href={link.href}
-                      className="text-gray-400 hover:text-earth-400 transition-colors duration-200 flex items-center space-x-1"
-                      target={link.external ? "_blank" : undefined}
-                      rel={link.external ? "noopener noreferrer" : undefined}
-                    >
-                      <span>{link.label}</span>
-                      {link.external && <ExternalLink className="w-3 h-3" />}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
 

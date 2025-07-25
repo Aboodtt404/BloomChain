@@ -44,7 +44,7 @@ const Web3Features: React.FC = () => {
               <Users className="w-8 h-8 text-web3-400" />
             </div>
             <h3 className="text-lg font-semibold text-white">DAO Governance</h3>
-            <p className="text-gray-400">Vote on updates using BCT tokens</p>
+            <p className="text-gray-400">Coming at launch - Vote on updates using BCT tokens</p>
           </div>
 
           <div className="text-center space-y-4">

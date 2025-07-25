@@ -126,14 +126,22 @@ const Roadmap: React.FC = () => {
         {/* CTA Section */}
         <div className="text-center mt-16 space-y-6">
           <h3 className="text-2xl font-bold text-white">
-            Want to influence our roadmap?
+            Be part of the journey
           </h3>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Join our DAO and help shape the future of BloomChain. BCT holders can propose features, 
-            vote on priorities, and guide our development direction.
+            Join our wishlist to get early access to BloomChain. DAO governance will be available 
+            at launch, allowing BCT holders to shape the future of the game.
           </p>
-          <button className="btn-golden">
-            Join DAO Community
+          <button 
+            onClick={() => {
+              const element = document.querySelector('#newsletter')
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}
+            className="btn-golden"
+          >
+            Join Wishlist
           </button>
         </div>
       </div>

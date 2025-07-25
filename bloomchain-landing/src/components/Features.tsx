@@ -27,7 +27,7 @@ const Features: React.FC = () => {
     {
       icon: <Users className="w-8 h-8" />,
       title: "DAO Governance",
-      description: "Vote on game updates, new features, and community events using BCT tokens. Your voice shapes the future of BloomChain.",
+      description: "Coming at launch! Vote on game updates, new features, and community events using BCT tokens. Your voice will shape the future of BloomChain.",
       color: "accent",
       stats: "Community Driven"
     },
@@ -165,10 +165,26 @@ const Features: React.FC = () => {
         {/* Bottom CTA */}
         <div className="text-center mt-16">
           <div className="inline-flex flex-col sm:flex-row gap-4">
-            <button className="btn-primary text-lg px-8 py-4">
-              Start Playing Today
+            <button 
+              onClick={() => {
+                const element = document.querySelector('#newsletter')
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' })
+                }
+              }}
+              className="btn-primary text-lg px-8 py-4"
+            >
+              Join Wishlist
             </button>
-            <button className="btn-secondary text-lg px-8 py-4">
+            <button 
+              onClick={() => {
+                const element = document.querySelector('#gameplay')
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' })
+                }
+              }}
+              className="btn-secondary text-lg px-8 py-4"
+            >
               Learn More
             </button>
           </div>
