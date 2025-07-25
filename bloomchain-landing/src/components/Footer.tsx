@@ -1,5 +1,5 @@
 import React from 'react'
-import { Sparkles, Github, Twitter, Linkedin, Mail } from 'lucide-react'
+import { Sparkles, Github, Linkedin, Mail } from 'lucide-react'
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear()
@@ -61,12 +61,6 @@ const Footer: React.FC = () => {
 
             {/* Social Links */}
             <div className="flex space-x-4">
-              <a
-                href="#"
-                className="p-3 rounded-xl bg-gray-800/50 hover:bg-gray-700/50 transition-colors duration-200 group"
-              >
-                <Twitter className="w-5 h-5 text-gray-400 group-hover:text-web3-400" />
-              </a>
               <a
                 href="#"
                 className="p-3 rounded-xl bg-gray-800/50 hover:bg-gray-700/50 transition-colors duration-200 group"

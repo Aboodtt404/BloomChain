@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import emailjs from '@emailjs/browser'
 import { Mail, Check, AlertCircle, Sparkles, Gift } from 'lucide-react'
 
 // Validation schema
@@ -16,6 +17,7 @@ type NewsletterFormData = z.infer<typeof newsletterSchema>
 const Newsletter: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const {
     register,
@@ -32,14 +34,61 @@ const Newsletter: React.FC = () => {
 
   const onSubmit = async (data: NewsletterFormData) => {
     setIsLoading(true)
+    setError(null)
     
-    // Simulate API call (replace with actual newsletter service)
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    console.log('Newsletter signup:', data)
-    setIsSubmitted(true)
-    setIsLoading(false)
-    reset()
+    try {
+      // EmailJS configuration from environment variables
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+      const adminTemplateId = import.meta.env.VITE_EMAILJS_ADMIN_TEMPLATE_ID
+      const userTemplateId = import.meta.env.VITE_EMAILJS_USER_TEMPLATE_ID
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      const recipientEmail = import.meta.env.VITE_RECIPIENT_EMAIL
+      
+      // Check if all required environment variables are set
+      if (!serviceId || !adminTemplateId || !userTemplateId || !publicKey || !recipientEmail) {
+        throw new Error('EmailJS configuration is incomplete. Please check your environment variables.')
+      }
+      
+      // Prepare template parameters for admin notification
+      const adminTemplateParams = {
+        to_email: recipientEmail,
+        from_email: data.email,
+        user_email: data.email,
+        notifications: data.notifications ? 'Yes' : 'No',
+        updates: data.updates ? 'Yes' : 'No',
+        signup_date: new Date().toLocaleDateString(),
+        signup_time: new Date().toLocaleTimeString(),
+      }
+
+      // Prepare template parameters for user confirmation
+      const userTemplateParams = {
+        to_email: data.email,
+        user_email: data.email,
+        user_name: data.email.split('@')[0], // Use email prefix as name
+        notifications: data.notifications ? 'Yes' : 'No',
+        updates: data.updates ? 'Yes' : 'No',
+        signup_date: new Date().toLocaleDateString(),
+      }
+
+      // Send both emails concurrently
+      const [adminResult, userResult] = await Promise.all([
+        emailjs.send(serviceId, adminTemplateId, adminTemplateParams, publicKey),
+        emailjs.send(serviceId, userTemplateId, userTemplateParams, publicKey)
+      ])
+
+      if (adminResult.status === 200 && userResult.status === 200) {
+        console.log('Both emails sent successfully:', { adminResult, userResult })
+        setIsSubmitted(true)
+        reset()
+      } else {
+        throw new Error('Failed to send one or both emails')
+      }
+    } catch (error) {
+      console.error('Error sending email:', error)
+      setError('Failed to join wishlist. Please try again later.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const benefits = [
@@ -63,7 +112,7 @@ const Newsletter: React.FC = () => {
             </h2>
             
             <p className="text-xl text-gray-300 mb-8">
-              You're now on the wishlist! Check your email for a confirmation and your first exclusive update.
+              You're now on the wishlist! We've sent you a confirmation email with all the details and what to expect next.
             </p>
             
             <div className="inline-flex items-center space-x-2 bg-golden-500/20 border border-golden-500/30 rounded-full px-6 py-3 text-golden-300">
@@ -182,6 +231,14 @@ const Newsletter: React.FC = () => {
                     </label>
                   </div>
                 </div>
+
+                {/* Error Message */}
+                {error && (
+                  <div className="flex items-center space-x-2 text-red-400 text-sm bg-red-400/10 border border-red-400/20 rounded-lg p-3">
+                    <AlertCircle className="w-4 h-4" />
+                    <span>{error}</span>
+                  </div>
+                )}
 
                 {/* Submit Button */}
                 <button

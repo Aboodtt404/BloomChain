@@ -1,5 +1,5 @@
 import React from 'react'
-import { Github, Twitter, Linkedin, Code, Cpu } from 'lucide-react'
+import { Github, Linkedin, Code, Cpu } from 'lucide-react'
 
 const Team: React.FC = () => {
   const teamMembers = [
@@ -12,7 +12,6 @@ const Team: React.FC = () => {
       color: 'earth',
       social: {
         github: '#',
-        twitter: '#',
         linkedin: '#'
       }
     },
@@ -24,9 +23,8 @@ const Team: React.FC = () => {
       icon: <Cpu className="w-8 h-8" />,
       color: 'web3',
       social: {
-        github: '#',
-        twitter: '#',
-        linkedin: '#'
+        github: 'https://github.com/Aboodtt404',
+        linkedin: 'https://www.linkedin.com/in/abdelrahman-emad-a06aa5268/'
       }
     }
   ]
@@ -139,12 +137,6 @@ const Team: React.FC = () => {
                       className="p-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition-colors duration-200"
                     >
                       <Github className="w-5 h-5 text-gray-400 hover:text-white" />
-                    </a>
-                    <a
-                      href={member.social.twitter}
-                      className="p-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition-colors duration-200"
-                    >
-                      <Twitter className="w-5 h-5 text-gray-400 hover:text-white" />
                     </a>
                     <a
                       href={member.social.linkedin}
