@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-gray-900 text-white font-sans antialiased;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    min-height: 100vh;
+  }
+
+  * {
+    @apply border-gray-700;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-earth-600 to-earth-700 hover:from-earth-700 hover:to-earth-800 
+           text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 
+           shadow-lg hover:shadow-glow-green transform hover:scale-105;
+  }
+
+  .btn-secondary {
+    @apply bg-gradient-to-r from-web3-600 to-web3-700 hover:from-web3-700 hover:to-web3-800 
+           text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 
+           shadow-lg hover:shadow-glow-blue transform hover:scale-105;
+  }
+
+  .btn-golden {
+    @apply bg-gradient-to-r from-golden-500 to-golden-600 hover:from-golden-600 hover:to-golden-700 
+           text-gray-900 font-bold py-3 px-8 rounded-full transition-all duration-300 
+           shadow-lg hover:shadow-glow-gold transform hover:scale-105;
+  }
+
+  .card-glow {
+    @apply bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6 
+           transition-all duration-300 hover:bg-gray-800/70 hover:border-earth-600/50 
+           hover:shadow-glow-green/30;
+  }
+
+  .text-gradient-green {
+    @apply bg-gradient-to-r from-earth-400 to-earth-600 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-golden-400 to-golden-600 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-web3 {
+    @apply bg-gradient-to-r from-web3-400 to-web3-600 bg-clip-text text-transparent;
+  }
+
+  .floating-elements {
+    @apply animate-float;
+  }
+
+  .pixel-border {
+    @apply shadow-pixel;
+  }
+
+  .glowing-text {
+    @apply animate-glow;
+    text-shadow: 0 0 10px currentColor;
+  }
+}
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Custom scroll animations */
+  .scroll-fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+  }
+
+  .scroll-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-scale-in {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.6s ease-out;
+  }
+
+  .scroll-scale-in.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Custom webkit scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-earth-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-earth-500;
+}
+
+/* Pixel art scaling for crisp images */
+.pixel-art {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
