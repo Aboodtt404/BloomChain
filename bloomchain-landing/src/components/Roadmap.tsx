@@ -4,47 +4,36 @@ import { Calendar, CheckCircle, Clock, Zap } from 'lucide-react'
 const Roadmap: React.FC = () => {
   const roadmapItems = [
     {
-      quarter: 'Q3 2025',
-      title: 'MVP Launch',
+      quarter: 'August 2025',
+      title: 'MVP Development',
       status: 'in-progress',
       items: [
         'WCHL 2025 Competition Entry',
         '4x4 Garden Grid System',
         'Basic NFT Crop Minting',
-        'Simple DAO Voting'
+        'Core Game Mechanics'
       ]
     },
     {
-      quarter: 'Q4 2025',
-      title: 'Core Features',
+      quarter: 'September 2025',
+      title: 'Beta Launch',
       status: 'planned',
       items: [
-        'Full Marketplace Launch',
-        'Advanced Puzzle Systems',
-        'Social Collectives',
-        'Mobile App Release'
+        'Play-to-Earn System',
+        'Puzzle Mechanics',
+        'ICP Token Integration',
+        'Community Testing'
       ]
     },
     {
-      quarter: 'Q1 2026',
-      title: 'Expansion',
+      quarter: 'October 2025',
+      title: 'Public Release',
       status: 'planned',
       items: [
-        'Multi-Chain Integration',
-        'VR Garden Experience',
-        'Cross-Game NFT Utility',
-        'Tournament System'
-      ]
-    },
-    {
-      quarter: 'Q2 2026',
-      title: 'Ecosystem',
-      status: 'planned',
-      items: [
-        'Developer SDK',
-        'Community Mod Tools',
-        'Educational Partnerships',
-        'Real-World Plant Adoption'
+        'Full Game Launch',
+        'NFT Marketplace',
+        'DAO Implementation',
+        'Performance Optimization'
       ]
     }
   ]

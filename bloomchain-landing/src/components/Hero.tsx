@@ -82,11 +82,16 @@ const Hero: React.FC = () => {
                 <ArrowDown className="w-5 h-5" />
               </button>
               <button 
-                onClick={scrollToFeatures}
+                onClick={() => {
+                  const element = document.querySelector('#game-mechanics')
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
                 className="btn-secondary text-lg px-8 py-4 flex items-center justify-center space-x-2"
               >
                 <Play className="w-5 h-5" />
-                <span>Watch Demo</span>
+                <span>Learn Gameplay</span>
               </button>
             </div>
 
@@ -102,62 +107,53 @@ const Hero: React.FC = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Users className="w-4 h-4 text-web3-400" />
-                <span>DAO Governance</span>
+                <span>DAO Coming Soon</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column - Pixel Art Showcase */}
-          <div className="relative h-96 lg:h-[600px] rounded-2xl overflow-hidden bg-gradient-to-br from-earth-900/50 to-web3-900/50 border border-gray-700">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10" />
+          {/* Right Column - Game Preview */}
+          <div className="relative h-96 lg:h-[600px] rounded-2xl overflow-hidden bg-gradient-to-br from-earth-900/30 to-web3-900/30 border border-gray-700/50">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
             
-            {/* Pixel Art Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-earth-800/20 to-web3-800/20">
-              {/* Grid Pattern */}
-              <div className="absolute inset-0 opacity-30" style={{
-                backgroundImage: `
-                  linear-gradient(rgba(76, 175, 80, 0.3) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(76, 175, 80, 0.3) 1px, transparent 1px)
-                `,
-                backgroundSize: '32px 32px'
-              }} />
-              
-              {/* Floating Pixel Elements */}
-              <div className="absolute top-16 left-16 w-8 h-8 bg-earth-400 animate-float pixel-art opacity-80"></div>
-              <div className="absolute top-32 right-20 w-6 h-6 bg-golden-400 animate-float pixel-art opacity-70" style={{ animationDelay: '1s' }}></div>
-              <div className="absolute bottom-32 left-20 w-10 h-10 bg-web3-400 animate-float pixel-art opacity-60" style={{ animationDelay: '2s' }}></div>
-              <div className="absolute bottom-20 right-16 w-4 h-4 bg-accent-400 animate-float pixel-art opacity-90" style={{ animationDelay: '0.5s' }}></div>
-              
-              {/* Glowing Orbs */}
-              <div className="absolute top-24 right-32 w-12 h-12 bg-earth-500/30 rounded-full blur-sm animate-pulse"></div>
-              <div className="absolute bottom-40 left-32 w-16 h-16 bg-golden-500/20 rounded-full blur-md animate-pulse" style={{ animationDelay: '1.5s' }}></div>
-              
-              {/* Central Focus Area */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <div className="relative">
-                  {/* Main Gem */}
-                  <div className="w-24 h-24 bg-gradient-to-br from-earth-400 to-earth-600 transform rotate-45 animate-glow pixel-art shadow-glow-green"></div>
-                  
-                  {/* Surrounding Elements */}
-                  <div className="absolute -top-8 -left-8 w-6 h-6 bg-golden-400 pixel-art animate-bounce"></div>
-                  <div className="absolute -top-8 -right-8 w-6 h-6 bg-web3-400 pixel-art animate-bounce" style={{ animationDelay: '0.5s' }}></div>
-                  <div className="absolute -bottom-8 -left-8 w-6 h-6 bg-accent-400 pixel-art animate-bounce" style={{ animationDelay: '1s' }}></div>
-                  <div className="absolute -bottom-8 -right-8 w-6 h-6 bg-earth-300 pixel-art animate-bounce" style={{ animationDelay: '1.5s' }}></div>
+            {/* Content */}
+            <div className="relative z-10 h-full flex flex-col justify-center items-center p-8 text-center">
+              <div className="space-y-6">
+                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-earth-400 to-earth-600 rounded-2xl flex items-center justify-center">
+                  <Sparkles className="w-10 h-10 text-white" />
                 </div>
-              </div>
-            </div>
-
-            {/* Game Info Overlay */}
-            <div className="absolute bottom-4 left-4 right-4 z-20">
-              <div className="bg-black/60 backdrop-blur-sm rounded-lg p-4 border border-gray-600">
-                <div className="flex items-center justify-between text-sm">
-                  <div className="text-earth-300">
-                    <span className="font-semibold">Pixel Art Style</span>
-                    <div className="text-xs text-gray-400">2D Top-Down Garden Game</div>
+                
+                <div>
+                  <h3 className="text-3xl font-bold text-earth-300 mb-3">Coming August 2025</h3>
+                  <p className="text-gray-400 mb-6">Experience the future of Web3 gaming</p>
+                </div>
+                
+                <div className="space-y-4 text-left max-w-sm">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-3 h-3 bg-earth-400 rounded-full"></div>
+                    <span className="text-gray-300">4x4 Grid Garden System</span>
                   </div>
-                  <div className="text-right">
-                    <div className="text-golden-300 font-semibold">4x4 Grid System</div>
-                    <div className="text-xs text-gray-400">64x64 Pixel Tiles</div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-3 h-3 bg-golden-400 rounded-full"></div>
+                    <span className="text-gray-300">NFT Crops & Assets</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-3 h-3 bg-web3-400 rounded-full"></div>
+                    <span className="text-gray-300">Play-to-Earn Mechanics</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-3 h-3 bg-accent-400 rounded-full"></div>
+                    <span className="text-gray-300">Built on Internet Computer</span>
+                  </div>
+                </div>
+                
+                <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 border border-gray-600/50 mt-8">
+                  <div className="text-sm text-gray-300">
+                    <div className="font-semibold text-earth-300 mb-1">Development Progress</div>
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div className="bg-gradient-to-r from-earth-400 to-golden-400 h-2 rounded-full" style={{width: '25%'}}></div>
+                    </div>
+                    <div className="text-xs text-gray-400 mt-1">25% Complete</div>
                   </div>
                 </div>
               </div>
