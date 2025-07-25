@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:github": "tsc -b && vite build --base=/BloomChain/",
+    "preview:github": "vite preview --base=/BloomChain/"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
