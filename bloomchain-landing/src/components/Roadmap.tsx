@@ -8,10 +8,10 @@ const Roadmap: React.FC = () => {
       title: 'MVP Development',
       status: 'in-progress',
       items: [
-        'WCHL 2025 Competition Entry',
         '4x4 Garden Grid System',
         'Basic NFT Crop Minting',
-        'Core Game Mechanics'
+        'Core Game Mechanics',
+        'User Interface Development'
       ]
     },
     {
@@ -79,7 +79,7 @@ const Roadmap: React.FC = () => {
           </h2>
           
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Our roadmap to revolutionizing Web3 gaming, starting with WCHL 2025 and expanding into a full ecosystem.
+            Our roadmap to revolutionizing Web3 gaming and expanding into a full ecosystem.
           </p>
         </div>
 

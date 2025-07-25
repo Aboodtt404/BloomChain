@@ -46,8 +46,7 @@ const Newsletter: React.FC = () => {
     "Early access to beta testing",
     "Exclusive NFT airdrops for supporters", 
     "Priority in game events and competitions",
-    "Developer insights and behind-the-scenes content",
-    "Special WCHL 2025 commemorative NFTs"
+    "Developer insights and behind-the-scenes content"
   ]
 
   if (isSubmitted) {
@@ -115,10 +114,6 @@ const Newsletter: React.FC = () => {
 
             {/* Trust Indicators */}
             <div className="flex flex-wrap gap-6 text-sm text-gray-400">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 rounded-full bg-earth-400 animate-pulse" />
-                <span>WCHL 2025 Finalist</span>
-              </div>
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 rounded-full bg-web3-400 animate-pulse" />
                 <span>Built on ICP</span>

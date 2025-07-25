@@ -86,12 +86,6 @@ const Footer: React.FC = () => {
                 <Mail className="w-5 h-5 text-gray-400 group-hover:text-earth-400" />
               </a>
             </div>
-
-            {/* Competition Badge */}
-            <div className="inline-flex items-center space-x-2 bg-golden-500/20 border border-golden-500/30 rounded-full px-4 py-2 text-sm font-medium text-golden-300">
-              <Sparkles className="w-4 h-4" />
-              <span>WCHL 2025 Finalist</span>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -121,7 +115,7 @@ const Footer: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             {/* Copyright */}
             <div className="text-gray-400 text-sm">
-              © {currentYear} BloomChain. All rights reserved. Built with ❤️ for WCHL 2025.
+              © {currentYear} BloomChain. All rights reserved.
             </div>
 
             {/* Legal Links */}
@@ -141,7 +135,7 @@ const Footer: React.FC = () => {
           {/* Disclaimer */}
           <div className="mt-6 pt-6 border-t border-gray-800">
             <p className="text-xs text-gray-500 leading-relaxed">
-              <strong>Disclaimer:</strong> BloomChain is currently in development for WCHL 2025. 
+              <strong>Disclaimer:</strong> BloomChain is currently in development. 
               All features, tokenomics, and earning estimates are subject to change. 
               Cryptocurrency investments carry risk. Please do your own research before participating in any play-to-earn activities.
               NFTs and tokens have no guaranteed value and may lose value.

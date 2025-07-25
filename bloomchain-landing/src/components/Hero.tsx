@@ -32,12 +32,6 @@ const Hero: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Content */}
           <div className="space-y-8 text-center lg:text-left">
-            {/* Badge */}
-            <div className="inline-flex items-center space-x-2 bg-earth-500/20 border border-earth-500/30 rounded-full px-4 py-2 text-sm font-medium text-earth-300">
-              <Sparkles className="w-4 h-4" />
-              <span>WCHL 2025 Finalist</span>
-            </div>
-
             {/* Main Headline */}
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
