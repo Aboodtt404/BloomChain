@@ -7,6 +7,7 @@ interface GrowingVineProps {
   className?: string;
   animated?: boolean;
   withLeaves?: boolean;
+  withFlowers?: boolean;
 }
 
 export const GrowingVine: React.FC<GrowingVineProps> = ({
@@ -16,6 +17,7 @@ export const GrowingVine: React.FC<GrowingVineProps> = ({
   className = '',
   animated = true,
   withLeaves = true,
+  withFlowers = false
 }) => {
   const [growthProgress, setGrowthProgress] = useState(0);
   const [leafPositions, setLeafPositions] = useState<number[]>([]);
@@ -182,7 +184,7 @@ export const GrowingVine: React.FC<GrowingVineProps> = ({
         })}
         
         {/* Small flowers along the vine */}
-        {leafPositions.slice(0, 2).map((position, index) => {
+        {withFlowers && leafPositions.slice(0, 2).map((position, index) => {
           if (position > growthProgress) return null;
           
           const flowerPos = getLeafPosition(position);
