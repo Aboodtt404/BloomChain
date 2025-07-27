@@ -1,0 +1,32 @@
+{
+  "canisters": {
+    "bloomchain_backend": {
+      "main": "src/bloomchain_backend/main.mo",
+      "type": "motoko"
+    },
+    "bloomchain_frontend": {
+      "dependencies": ["bloomchain_backend"],
+      "source": ["bloomchain-landing/dist"],
+      "type": "assets",
+      "workspace": "bloomchain-landing"
+    },
+    "internet_identity": {
+      "type": "pull",
+      "id": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+    }
+  },
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:4943",
+      "type": "ephemeral"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+} 

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Menu, X, Sparkles } from 'lucide-react'
+import { AuthButton } from './AuthButton'
+import { useAuth } from '../contexts/AuthContext'
 
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const { isAuthenticated } = useAuth()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,14 +73,14 @@ const Navigation: React.FC = () => {
             </div>
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden lg:block">
-            <button
-              onClick={() => scrollToSection('#newsletter')}
-              className="btn-golden text-sm"
-            >
-              Join Wishlist
-            </button>
+          {/* Authentication & CTA Buttons */}
+          <div className="hidden lg:flex items-center space-x-4">
+            <AuthButton showPrincipal={isAuthenticated} />
+            {isAuthenticated && (
+              <span className="text-emerald-400 text-sm font-medium">
+                ✓ Connected to ICP
+              </span>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -109,12 +112,16 @@ const Navigation: React.FC = () => {
                 {item.label}
               </button>
             ))}
-            <button
-              onClick={() => scrollToSection('#newsletter')}
-              className="w-full mt-4 btn-golden text-sm"
-            >
-              Join Wishlist
-            </button>
+            <div className="mt-4 space-y-3">
+              <AuthButton className="w-full justify-center" />
+              {isAuthenticated && (
+                <div className="text-center">
+                  <span className="text-emerald-400 text-sm font-medium">
+                    ✓ Connected to ICP
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

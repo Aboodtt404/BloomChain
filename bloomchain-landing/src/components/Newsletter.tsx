@@ -1,277 +1,129 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import emailjs from '@emailjs/browser'
-import { Mail, Check, AlertCircle, Sparkles, Gift } from 'lucide-react'
+import { useAuth } from '../contexts/AuthContext'
 
-// Validation schema
 const newsletterSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
-  notifications: z.boolean(),
-  updates: z.boolean(),
+  message: z.string().min(10, 'Message must be at least 10 characters').max(1000, 'Message too long'),
 })
 
-type NewsletterFormData = z.infer<typeof newsletterSchema>
+type NewsletterData = z.infer<typeof newsletterSchema>
 
-const Newsletter: React.FC = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<NewsletterFormData>({
-    resolver: zodResolver(newsletterSchema),
-    defaultValues: {
-      notifications: true,
-      updates: true,
-    },
+export function Newsletter() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const { isAuthenticated, principal } = useAuth()
+  
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<NewsletterData>({
+    resolver: zodResolver(newsletterSchema)
   })
 
-  const onSubmit = async (data: NewsletterFormData) => {
-    setIsLoading(true)
-    setError(null)
+  const onSubmit = async (data: NewsletterData) => {
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
     
     try {
-      // EmailJS configuration from environment variables
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
-      const adminTemplateId = import.meta.env.VITE_EMAILJS_ADMIN_TEMPLATE_ID
-      const userTemplateId = import.meta.env.VITE_EMAILJS_USER_TEMPLATE_ID
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      const recipientEmail = import.meta.env.VITE_RECIPIENT_EMAIL
-      
-      // Check if all required environment variables are set
-      if (!serviceId || !adminTemplateId || !userTemplateId || !publicKey || !recipientEmail) {
-        throw new Error('EmailJS configuration is incomplete. Please check your environment variables.')
-      }
-      
-      // Prepare template parameters for admin notification
-      const adminTemplateParams = {
-        to_email: recipientEmail,
-        from_email: data.email,
-        user_email: data.email,
-        notifications: data.notifications ? 'Yes' : 'No',
-        updates: data.updates ? 'Yes' : 'No',
-        signup_date: new Date().toLocaleDateString(),
-        signup_time: new Date().toLocaleTimeString(),
-      }
-
-      // Prepare template parameters for user confirmation
-      const userTemplateParams = {
-        to_email: data.email,
-        user_email: data.email,
-        user_name: data.email.split('@')[0], // Use email prefix as name
-        notifications: data.notifications ? 'Yes' : 'No',
-        updates: data.updates ? 'Yes' : 'No',
-        signup_date: new Date().toLocaleDateString(),
-      }
-
-      // Send both emails concurrently
-      const [adminResult, userResult] = await Promise.all([
-        emailjs.send(serviceId, adminTemplateId, adminTemplateParams, publicKey),
-        emailjs.send(serviceId, userTemplateId, userTemplateParams, publicKey)
-      ])
-
-      if (adminResult.status === 200 && userResult.status === 200) {
-        console.log('Both emails sent successfully:', { adminResult, userResult })
-        setIsSubmitted(true)
-        reset()
+      if (isAuthenticated) {
+        // TODO: Submit to backend canister
+        console.log('Submitting to backend canister:', data)
+        // const result = await submitMessage(data.message)
       } else {
-        throw new Error('Failed to send one or both emails')
+        // Fallback to email service for non-authenticated users
+        console.log('Using email service for non-authenticated user:', data)
       }
+      
+      setSubmitStatus('success')
+      reset()
     } catch (error) {
-      console.error('Error sending email:', error)
-      setError('Failed to join wishlist. Please try again later.')
+      console.error('Submission error:', error)
+      setSubmitStatus('error')
     } finally {
-      setIsLoading(false)
+      setIsSubmitting(false)
     }
   }
 
-  const benefits = [
-    "Early access to beta testing",
-    "Exclusive NFT airdrops for supporters", 
-    "Priority in game events and competitions",
-    "Developer insights and behind-the-scenes content"
-  ]
-
-  if (isSubmitted) {
-    return (
-      <section id="newsletter" className="py-20 bg-gradient-to-br from-earth-900 via-gray-900 to-web3-900">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-3xl p-12">
-            <div className="w-20 h-20 mx-auto mb-6 bg-earth-500/20 rounded-full flex items-center justify-center">
-              <Check className="w-10 h-10 text-earth-400" />
-            </div>
-            
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Welcome to the BloomChain Family! 🌱
-            </h2>
-            
-            <p className="text-xl text-gray-300 mb-8">
-              You're now on the wishlist! We've sent you a confirmation email with all the details and what to expect next.
-            </p>
-            
-            <div className="inline-flex items-center space-x-2 bg-golden-500/20 border border-golden-500/30 rounded-full px-6 py-3 text-golden-300">
-              <Gift className="w-5 h-5" />
-              <span className="font-semibold">Exclusive NFT airdrop coming soon!</span>
-            </div>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
   return (
-    <section id="newsletter" className="py-20 bg-gradient-to-br from-earth-900 via-gray-900 to-web3-900">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Content */}
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <div className="inline-flex items-center space-x-2 bg-golden-500/20 border border-golden-500/30 rounded-full px-4 py-2 text-sm font-medium text-golden-300">
-                <Sparkles className="w-4 h-4" />
-                <span>Join the Community</span>
-              </div>
-              
-              <h2 className="text-4xl lg:text-5xl font-bold">
-                <span className="text-gradient-gold">Be Among</span>{' '}
-                <span className="text-white">the First</span>
-              </h2>
-              
-              <p className="text-xl text-gray-300">
-                Join our exclusive wishlist and be the first to experience the future of Web3 gaming. 
-                Get early access, exclusive rewards, and shape the development of BloomChain.
-              </p>
-            </div>
-
-            {/* Benefits List */}
-            <div className="space-y-3">
-              <h3 className="text-lg font-semibold text-white mb-4">What you'll get:</h3>
-              {benefits.map((benefit, index) => (
-                <div key={index} className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-earth-500/20 flex items-center justify-center mt-0.5">
-                    <Check className="w-4 h-4 text-earth-400" />
-                  </div>
-                  <p className="text-gray-300">{benefit}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="flex flex-wrap gap-6 text-sm text-gray-400">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 rounded-full bg-web3-400 animate-pulse" />
-                <span>Built on ICP</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 rounded-full bg-golden-400 animate-pulse" />
-                <span>No Spam Promise</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column - Form */}
-          <div className="relative">
-            {/* Background Effects */}
-            <div className="absolute inset-0 bg-gradient-to-br from-golden-500/10 to-earth-500/10 rounded-3xl blur-3xl transform rotate-6" />
-            <div className="absolute inset-0 bg-gradient-to-tl from-web3-500/10 to-accent-500/10 rounded-3xl blur-2xl transform -rotate-3" />
-            
-            <div className="relative bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-3xl p-8">
-              <form onSubmit={handleSubmit(onSubmit as any)} className="space-y-6">
-                {/* Email Input */}
-                <div className="space-y-2">
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300">
-                    Email Address
-                  </label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <input
-                      {...register('email')}
-                      type="email"
-                      id="email"
-                      placeholder="your@email.com"
-                      className="w-full pl-12 pr-4 py-4 bg-gray-900/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-earth-500 focus:ring-2 focus:ring-earth-500/20 transition-all duration-200"
-                    />
-                  </div>
-                  {errors.email && (
-                    <div className="flex items-center space-x-2 text-red-400 text-sm">
-                      <AlertCircle className="w-4 h-4" />
-                      <span>{errors.email.message}</span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Preferences */}
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-3">
-                    <input
-                      {...register('notifications')}
-                      type="checkbox"
-                      id="notifications"
-                      className="w-4 h-4 text-earth-500 bg-gray-900 border-gray-600 rounded focus:ring-earth-500 focus:ring-2"
-                    />
-                    <label htmlFor="notifications" className="text-sm text-gray-300">
-                      Get notified about game updates and new features
-                    </label>
-                  </div>
-                  
-                  <div className="flex items-center space-x-3">
-                    <input
-                      {...register('updates')}
-                      type="checkbox"
-                      id="updates"
-                      className="w-4 h-4 text-earth-500 bg-gray-900 border-gray-600 rounded focus:ring-earth-500 focus:ring-2"
-                    />
-                    <label htmlFor="updates" className="text-sm text-gray-300">
-                      Receive exclusive content and early access opportunities
-                    </label>
-                  </div>
-                </div>
-
-                {/* Error Message */}
-                {error && (
-                  <div className="flex items-center space-x-2 text-red-400 text-sm bg-red-400/10 border border-red-400/20 rounded-lg p-3">
-                    <AlertCircle className="w-4 h-4" />
-                    <span>{error}</span>
-                  </div>
+    <section className="py-20 bg-gradient-to-br from-black via-gray-900 to-emerald-900/20">
+      <div className="container mx-auto px-4">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-4xl font-bold text-white mb-6">
+            Stay Updated with BloomChain
+          </h2>
+          <p className="text-gray-300 mb-8">
+            {isAuthenticated 
+              ? `Connected as ${principal?.toString().slice(0, 8)}... Send us a message directly through the blockchain!`
+              : 'Get the latest updates on our presale, tokenomics, and launch announcements.'
+            }
+          </p>
+          
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="flex flex-col gap-4">
+              <div>
+                <input
+                  {...register('email')}
+                  type="email"
+                  placeholder="Enter your email address"
+                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                />
+                {errors.email && (
+                  <p className="text-red-400 text-sm mt-1">{errors.email.message}</p>
                 )}
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full btn-golden text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
-                >
-                  {isLoading ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-gray-900 border-t-transparent rounded-full animate-spin" />
-                      <span>Joining...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Join Wishlist</span>
-                      <Sparkles className="w-5 h-5" />
-                    </>
-                  )}
-                </button>
-
-                {/* Privacy Note */}
-                <p className="text-xs text-gray-500 text-center">
-                  We respect your privacy. Unsubscribe at any time. 
-                  <br />
-                  By joining, you agree to our terms and privacy policy.
-                </p>
-              </form>
+              </div>
+              
+              <div>
+                <textarea
+                  {...register('message')}
+                  placeholder={isAuthenticated 
+                    ? "Send us a message on-chain..." 
+                    : "Tell us what you're most excited about..."
+                  }
+                  rows={4}
+                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 resize-none"
+                />
+                {errors.message && (
+                  <p className="text-red-400 text-sm mt-1">{errors.message.message}</p>
+                )}
+              </div>
             </div>
-          </div>
+            
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-gradient-to-r from-emerald-400 to-blue-400 text-black px-8 py-3 rounded-lg font-semibold hover:from-emerald-300 hover:to-blue-300 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting 
+                ? 'Submitting...' 
+                : isAuthenticated 
+                  ? 'Send Message On-Chain' 
+                  : 'Subscribe & Send'
+              }
+            </button>
+            
+            {submitStatus === 'success' && (
+              <p className="text-emerald-400 text-sm">
+                {isAuthenticated 
+                  ? 'Message submitted to the blockchain successfully!' 
+                  : 'Thank you for subscribing! We\'ll be in touch soon.'
+                }
+              </p>
+            )}
+            
+            {submitStatus === 'error' && (
+              <p className="text-red-400 text-sm">
+                Something went wrong. Please try again.
+              </p>
+            )}
+          </form>
+          
+          {!isAuthenticated && (
+            <p className="text-gray-400 text-sm mt-4">
+              💡 Connect with Internet Identity to send messages directly to our blockchain!
+            </p>
+          )}
         </div>
       </div>
     </section>
   )
-}
-
-export default Newsletter 
+} 

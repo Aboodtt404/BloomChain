@@ -12,6 +12,11 @@
     "preview:github": "vite preview --base=/BloomChain/"
   },
   "dependencies": {
+    "@dfinity/agent": "^1.4.0",
+    "@dfinity/auth-client": "^1.4.0",
+    "@dfinity/candid": "^1.4.0",
+    "@dfinity/identity": "^1.4.0",
+    "@dfinity/principal": "^1.4.0",
     "@emailjs/browser": "^4.4.1",
     "@hookform/resolvers": "^5.1.1",
     "@react-three/drei": "^10.6.0",
