@@ -5,7 +5,6 @@ import Result "mo:base/Result";
 
 actor BloomChainBackend {
     
-    // Type definitions
     public type Message = {
         id: Nat;
         content: Text;
@@ -20,12 +19,9 @@ actor BloomChainBackend {
         joinedAt: Int;
     };
 
-    // State variables
     private stable var messageIdCounter: Nat = 0;
     private stable var messages: [Message] = [];
     private stable var users: [UserProfile] = [];
-
-    // Public functions
     public query func greet(name: Text): async Text {
         "Hello, " # name # "! Welcome to BloomChain!"
     };
@@ -37,7 +33,6 @@ actor BloomChainBackend {
         }
     };
 
-    // User management
     public shared(msg) func createOrUpdateProfile(username: ?Text, email: ?Text): async Result.Result<UserProfile, Text> {
         let caller = msg.caller;
         
@@ -52,7 +47,6 @@ actor BloomChainBackend {
             joinedAt = Time.now();
         };
 
-        // For simplicity, just append new profile (in production, you'd want to update existing)
         users := Array.append(users, [profile]);
         #ok(profile)
     };
@@ -70,7 +64,6 @@ actor BloomChainBackend {
         })
     };
 
-    // Message/Contact functionality
     public shared(msg) func submitMessage(content: Text): async Result.Result<Message, Text> {
         let caller = msg.caller;
         
@@ -100,8 +93,8 @@ actor BloomChainBackend {
 
     public query func getMessages(limit: ?Nat): async [Message] {
         let limitValue = switch(limit) {
-            case (?l) { if (l > 100) 100 else l }; // Max 100 messages
-            case null { 10 }; // Default 10 messages
+            case (?l) { if (l > 100) 100 else l };
+            case null { 10 };
         };
         
         let messageCount = messages.size();
@@ -121,7 +114,6 @@ actor BloomChainBackend {
         messages.size()
     };
 
-    // Authentication helper
     public shared(msg) func whoami(): async Principal {
         msg.caller
     };

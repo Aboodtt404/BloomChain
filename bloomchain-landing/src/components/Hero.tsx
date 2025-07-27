@@ -1,5 +1,6 @@
 import React from 'react'
-import { Play, ArrowDown, Sparkles, Coins, Users } from 'lucide-react'
+import { Play, ArrowDown, Sparkles, Coins, Users, Leaf, Flower2, Zap } from 'lucide-react'
+import { GrowingVine } from './GrowingVine'
 
 const Hero: React.FC = () => {
   const scrollToFeatures = () => {
@@ -18,14 +19,37 @@ const Hero: React.FC = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/60 via-slate-900/40 to-gray-900/60" />
+      {/* Garden Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-green-900/20 via-emerald-900/10 to-teal-900/20" />
       
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-earth-500/10 rounded-full blur-3xl animate-float" />
-        <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-web3-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
-        <div className="absolute bottom-1/4 left-1/3 w-48 h-48 bg-golden-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
+             {/* Garden Elements Background */}
+       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+         {/* Decorative Vines */}
+         <div className="absolute top-0 left-1/4 opacity-30">
+           <GrowingVine direction="down" length={120} withLeaves={true}/>
+         </div>
+         <div className="absolute top-0 right-1/3 opacity-20 transform scale-x-[-1]">
+           <GrowingVine direction="down" length={140} withLeaves={true}/>
+         </div>
+        
+        {/* Floating Garden Particles */}
+        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-green-400/20 rounded-full blur-2xl animate-pulse" />
+        <div className="absolute top-3/4 right-1/4 w-48 h-48 bg-emerald-400/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-1/4 left-1/3 w-24 h-24 bg-lime-400/25 rounded-full blur-xl animate-pulse" style={{ animationDelay: '4s' }} />
+        
+        {/* Magical Sparkles */}
+        {Array.from({ length: 12 }, (_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-emerald-300 rounded-full animate-pulse garden-sparkle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 3}s`
+            }}
+          />
+        ))}
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
@@ -107,47 +131,47 @@ const Hero: React.FC = () => {
           </div>
 
           {/* Right Column - Game Preview */}
-          <div className="relative h-96 lg:h-[600px] rounded-2xl overflow-hidden bg-gradient-to-br from-earth-900/30 to-web3-900/30 border border-gray-700/50">
+          <div className="relative h-96 lg:h-[600px] rounded-2xl overflow-hidden bg-gradient-to-br from-green-900/30 to-emerald-900/30 border border-green-700/50 backdrop-blur-sm">
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
             
             {/* Content */}
             <div className="relative z-10 h-full flex flex-col justify-center items-center p-8 text-center">
               <div className="space-y-6">
-                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-earth-400 to-earth-600 rounded-2xl flex items-center justify-center">
-                  <Sparkles className="w-10 h-10 text-white" />
+                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-green-400 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg shadow-green-500/20">
+                  <Flower2 className="w-10 h-10 text-white" />
                 </div>
                 
                 <div>
-                  <h3 className="text-3xl font-bold text-earth-300 mb-3">Coming August 2025</h3>
-                  <p className="text-gray-400 mb-6">Experience the future of Web3 gaming</p>
+                  <h3 className="text-3xl font-bold text-green-300 mb-3">Coming August 2025</h3>
+                  <p className="text-gray-400 mb-6">Experience the future of Web3 gardening</p>
                 </div>
                 
                 <div className="space-y-4 text-left max-w-sm">
                   <div className="flex items-center space-x-3">
-                    <div className="w-3 h-3 bg-earth-400 rounded-full"></div>
+                    <Leaf className="w-4 h-4 text-green-400" />
                     <span className="text-gray-300">4x4 Grid Garden System</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-3 h-3 bg-golden-400 rounded-full"></div>
+                    <Flower2 className="w-4 h-4 text-pink-400" />
                     <span className="text-gray-300">NFT Crops & Assets</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-3 h-3 bg-web3-400 rounded-full"></div>
+                    <Coins className="w-4 h-4 text-yellow-400" />
                     <span className="text-gray-300">Play-to-Earn Mechanics</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-3 h-3 bg-accent-400 rounded-full"></div>
+                    <Zap className="w-4 h-4 text-blue-400" />
                     <span className="text-gray-300">Built on Internet Computer</span>
                   </div>
                 </div>
                 
-                <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 border border-gray-600/50 mt-8">
+                <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 border border-green-600/50 mt-8">
                   <div className="text-sm text-gray-300">
-                    <div className="font-semibold text-earth-300 mb-1">Development Progress</div>
+                    <div className="font-semibold text-green-300 mb-1">Garden Growth Progress</div>
                     <div className="w-full bg-gray-700 rounded-full h-2">
-                      <div className="bg-gradient-to-r from-earth-400 to-golden-400 h-2 rounded-full" style={{width: '25%'}}></div>
+                      <div className="bg-gradient-to-r from-green-400 to-emerald-400 h-2 rounded-full" style={{width: '25%'}}></div>
                     </div>
-                    <div className="text-xs text-gray-400 mt-1">25% Complete</div>
+                    <div className="text-xs text-gray-400 mt-1">25% Bloomed</div>
                   </div>
                 </div>
               </div>
@@ -159,7 +183,7 @@ const Hero: React.FC = () => {
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
           <button 
             onClick={scrollToFeatures}
-            className="text-gray-400 hover:text-earth-400 transition-colors duration-200"
+            className="text-gray-400 hover:text-green-400 transition-colors duration-200"
           >
             <ArrowDown className="w-8 h-8" />
           </button>

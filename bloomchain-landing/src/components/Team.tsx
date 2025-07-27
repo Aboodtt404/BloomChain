@@ -11,8 +11,8 @@ const Team: React.FC = () => {
       icon: <Code className="w-8 h-8" />,
       color: 'earth',
       social: {
-        github: '#',
-        linkedin: '#'
+        github: 'https://github.com/Kidzantso',
+        linkedin: 'https://www.linkedin.com/in/nader-maged/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
       }
     },
     {

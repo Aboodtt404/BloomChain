@@ -9,6 +9,7 @@ import { Newsletter } from './components/Newsletter'
 import Footer from './components/Footer'
 import Navigation from './components/Navigation'
 import GlobalBackground from './components/GlobalBackground'
+import { GardenSection } from './components/GardenSection'
 
 function App() {
   return (
@@ -16,36 +17,56 @@ function App() {
       {/* Global Three.js Background */}
       <GlobalBackground />
       
+
+      
       {/* Navigation */}
       <div className="relative z-50">
         <Navigation />
       </div>
       
+
+      
       {/* Main Content */}
       <div className="relative z-10">
-        {/* Hero Section with 3D Garden */}
-        <Hero />
+        {/* Hero Section with Garden Theme */}
+        <GardenSection theme="spring" intensity="lush" showBorder={false} showFlowers={false}>
+          <Hero />
+        </GardenSection>
         
-        {/* Features Overview */}
-        <Features />
+        {/* Features Overview with Summer Theme */}
+        <GardenSection theme="summer" intensity="medium" showVines={true} showFlowers={true}>
+          <Features />
+        </GardenSection>
         
-        {/* Game Mechanics */}
-        <GameMechanics />
+        {/* Game Mechanics with Mystical Theme */}
+        <GardenSection theme="mystical" intensity="subtle" showBorder={true} showVines={true}>
+          <GameMechanics />
+        </GardenSection>
         
-        {/* Web3 & NFT Features */}
-        <Web3Features />
+        {/* Web3 & NFT Features with Spring Theme */}
+        <GardenSection theme="spring" intensity="medium" showVines={true}>
+          <Web3Features />
+        </GardenSection>
         
-        {/* Roadmap */}
-        <Roadmap />
+        {/* Roadmap with Autumn Theme */}
+        <GardenSection theme="autumn" intensity="medium" showFlowers={true} showVines={true}>
+          <Roadmap />
+        </GardenSection>
         
-        {/* Team */}
-        <Team />
+        {/* Team with Summer Theme */}
+        <GardenSection theme="summer" intensity="subtle" showVines={true}>
+          <Team />
+        </GardenSection>
         
-        {/* Newsletter Signup */}
-        <Newsletter />
+        {/* Newsletter Signup with Mystical Theme */}
+        <GardenSection theme="mystical" intensity="lush" showBorder={true} showVines={true}>
+          <Newsletter />
+        </GardenSection>
         
-        {/* Footer */}
-        <Footer />
+        {/* Footer with Spring Theme */}
+        <GardenSection theme="spring" intensity="subtle" showVines={true}>
+          <Footer />
+        </GardenSection>
       </div>
     </div>
   )
