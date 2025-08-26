@@ -3,10 +3,15 @@ import { Menu, X, Sparkles } from 'lucide-react'
 import { AuthButton } from './AuthButton'
 import { useAuth } from '../contexts/AuthContext'
 
-const Navigation: React.FC = () => {
+interface NavigationProps {
+  onShowProfile: () => void;
+  currentView?: 'landing' | 'profile';
+}
+
+const Navigation: React.FC<NavigationProps> = ({ onShowProfile, currentView = 'landing' }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const { isAuthenticated } = useAuth()
+  const { user } = useAuth()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,18 +22,28 @@ const Navigation: React.FC = () => {
   }, [])
 
   const navItems = [
-    { label: 'Features', href: '#features' },
-    { label: 'Play Game', href: '#game' },
-    { label: 'Gameplay', href: '#gameplay' },
-    { label: 'Web3', href: '#web3' },
-    { label: 'Roadmap', href: '#roadmap' },
-    { label: 'Team', href: '#team' },
+    { label: 'Features', href: '#features', isActive: false },
+    { label: 'Gameplay', href: '#gameplay', isActive: false },
+    { label: 'Web3', href: '#web3', isActive: false },
+    { label: 'Roadmap', href: '#roadmap', isActive: false },
+    { label: 'Team', href: '#team', isActive: false },
   ]
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+    // For other sections, scroll if on landing page
+    if (currentView === 'landing') {
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+
+    // For other sections, scroll if on landing page
+    if (currentView === 'landing') {
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
     }
     setIsMenuOpen(false)
   }
@@ -36,8 +51,8 @@ const Navigation: React.FC = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-          ? 'bg-gray-900/95 backdrop-blur-md border-b border-gray-800'
-          : 'bg-transparent'
+        ? 'bg-gray-900/95 backdrop-blur-md border-b border-gray-800'
+        : 'bg-transparent'
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,12 +65,14 @@ const Navigation: React.FC = () => {
                 <Sparkles className="w-8 h-8 text-earth-500 opacity-30" />
               </div>
             </div>
-            <div>
-              <h1 className="text-2xl font-bold text-gradient-green">
-                BloomChain
-              </h1>
-              <p className="text-xs text-gray-400 -mt-1">Web3 Gardening</p>
-            </div>
+            {currentView === 'landing' && (
+              <div>
+                <h1 className="text-2xl font-bold text-gradient-green">
+                  BloomChain
+                </h1>
+                <p className="text-xs text-gray-400 -mt-1">Web3 Gardening</p>
+              </div>
+            )}
           </div>
 
           {/* Desktop Navigation */}
@@ -65,7 +82,10 @@ const Navigation: React.FC = () => {
                 <button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
-                  className="text-gray-300 hover:text-earth-400 transition-colors duration-200 font-medium"
+                  className={`transition-colors duration-200 font-medium ${item.isActive
+                    ? 'text-green-400 font-semibold'
+                    : 'text-gray-300 hover:text-earth-400'
+                    }`}
                 >
                   {item.label}
                 </button>
@@ -75,11 +95,15 @@ const Navigation: React.FC = () => {
 
           {/* Authentication & CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
-            <AuthButton showPrincipal={isAuthenticated} />
-            {isAuthenticated && (
-              <span className="text-emerald-400 text-sm font-medium">
-                ✓ Connected to ICP
-              </span>
+
+            <AuthButton showPrincipal={user?.isAuthenticated} />
+            {user?.isAuthenticated && currentView !== 'profile' && (
+              <button
+                onClick={onShowProfile}
+                className="text-emerald-400 hover:text-emerald-300 text-sm font-medium transition-colors border border-emerald-400/30 rounded-lg px-3 py-1 hover:bg-emerald-400/10 transition-all"
+              >
+                Profile
+              </button>
             )}
           </div>
 
@@ -114,7 +138,15 @@ const Navigation: React.FC = () => {
             ))}
             <div className="mt-4 space-y-3">
               <AuthButton className="w-full justify-center" />
-              {isAuthenticated && (
+              {user?.isAuthenticated && currentView !== 'profile' && (
+                <button
+                  onClick={onShowProfile}
+                  className="w-full text-emerald-400 hover:text-emerald-300 text-sm font-medium border border-emerald-400/30 rounded-lg px-3 py-2 hover:bg-emerald-400/10 transition-all"
+                >
+                  Profile
+                </button>
+              )}
+              {user?.isAuthenticated && (
                 <div className="text-center">
                   <span className="text-emerald-400 text-sm font-medium">
                     ✓ Connected to ICP

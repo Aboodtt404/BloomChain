@@ -11,10 +11,10 @@ export const AuthButton: React.FC<AuthButtonProps> = ({
   className = '',
   showPrincipal = false 
 }) => {
-  const { isAuthenticated, login, logout, principal, isLoading } = useAuth();
+  const { user, login, logout, isLoading } = useAuth();
 
   const handleAuth = async () => {
-    if (isAuthenticated) {
+    if (user?.isAuthenticated) {
       await logout();
     } else {
       await login();
@@ -41,11 +41,11 @@ export const AuthButton: React.FC<AuthButtonProps> = ({
 
   return (
     <div className="flex items-center gap-3">
-      {isAuthenticated && showPrincipal && (
+      {user?.isAuthenticated && showPrincipal && (
         <div className="flex items-center gap-2 px-3 py-1 bg-blue-50 rounded-lg text-sm">
           <User className="w-4 h-4 text-blue-600" />
           <span className="text-blue-800 font-mono">
-            {formatPrincipal(principal)}
+            {formatPrincipal(user.principal)}
           </span>
         </div>
       )}
@@ -53,12 +53,12 @@ export const AuthButton: React.FC<AuthButtonProps> = ({
       <button
         onClick={handleAuth}
         className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors
-          ${isAuthenticated 
+          ${user?.isAuthenticated 
             ? 'bg-red-100 text-red-700 hover:bg-red-200' 
             : 'bg-blue-600 text-white hover:bg-blue-700'
           } ${className}`}
       >
-        {isAuthenticated ? (
+        {user?.isAuthenticated ? (
           <>
             <LogOut className="w-4 h-4" />
             Logout

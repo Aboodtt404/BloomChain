@@ -1,6 +1,6 @@
-# BloomChain - ICP Landing Page with Internet Identity
+# BloomChain - Web3 Gardening Game on ICP
 
-This project has been converted from a standard React landing page to a full Internet Computer Protocol (ICP) application with Internet Identity authentication.
+A decentralized Web3 gardening game built on the Internet Computer Protocol (ICP) with Unity game integration, Internet Identity authentication, and blockchain-powered features.
 
 ## 🏗️ Project Structure
 
@@ -10,23 +10,65 @@ BloomChain/
 ├── src/
 │   └── bloomchain_backend/         # Motoko backend canister
 │       └── main.mo                 # Backend logic
-└── bloomchain-landing/             # React frontend (asset canister)
-    ├── src/
-    │   ├── lib/auth.ts            # Internet Identity integration
-    │   ├── contexts/AuthContext.tsx # React auth context
-    │   ├── components/AuthButton.tsx # Login/logout component
-    │   └── ...                    # Other React components
-    ├── package.json               # Updated with ICP dependencies
-    └── vite.config.ts             # Configured for ICP deployment
+├── bloomchain-landing/             # React frontend (asset canister)
+│   ├── src/
+│   │   ├── contexts/AuthContext.tsx # Internet Identity auth context
+│   │   ├── components/
+│   │   │   ├── AuthButton.tsx      # Login/logout component
+│   │   │   ├── ProfilePage.tsx     # User profile page
+│   │   │   ├── GameSection.tsx     # Unity game integration
+│   │   │   ├── Navigation.tsx      # Navigation with auth state
+│   │   │   └── ...                 # Other React components
+│   │   └── vite.config.ts          # Configured for ICP deployment
+├── unity/                          # Unity project source files
+├── deploy-local.sh                 # Local deployment script
+├── deploy-mainnet.sh               # Mainnet deployment script
+├── setup-env.sh                    # Environment setup helper
+├── env.local                       # Local environment variables
+├── env.mainnet                     # Mainnet environment variables
+└── DEPLOYMENT.md                   # Deployment guide
 ```
 
-## 🚀 Features
+## 🚀 Current Features
 
-- **Internet Identity Authentication**: Secure, decentralized login
-- **Backend Canister**: Motoko-based smart contract for data storage
-- **Frontend Canister**: React app deployed as an asset canister
-- **On-chain Messaging**: Authenticated users can submit messages to the blockchain
-- **Responsive Design**: Beautiful, modern UI with Tailwind CSS
+### ✅ **Implemented & Working**
+
+- **🌐 Internet Identity Authentication**: Secure, decentralized login system
+- **🎮 Unity Game Integration**: WebGL game embedded directly in the dApp
+- **🔒 Protected Game Access**: Game only accessible to authenticated users
+- **👤 User Profile System**: Profile page with user information and logout
+- **🏗️ Backend Canister**: Motoko-based smart contract infrastructure
+- **🎨 Modern UI/UX**: Beautiful, responsive design with Tailwind CSS
+- **📱 Responsive Design**: Works on desktop, tablet, and mobile
+- **🚀 Deployment Ready**: Local and mainnet deployment scripts
+- **🔧 Environment Management**: Separate configs for local/mainnet
+
+### 🎯 **Game Features (Current)**
+
+- **🎮 Unity WebGL Game**: Core gardening gameplay mechanics
+- **🔐 Authentication Required**: Login wall protects game access
+- **📊 Game Statistics**: Display of game features and capabilities
+- **🎨 Beautiful Game Section**: Themed UI with game preview for non-authenticated users
+
+## 🚧 **In Development / Planned**
+
+### **Phase 2: Enhanced Game Integration**
+- [ ] **Game Progress Tracking**: Save/load game state on-chain
+- [ ] **Player Statistics**: Track achievements, scores, and progress
+- [ ] **Multiplayer Features**: Player interaction and trading
+- [ ] **Leaderboards**: Competitive gameplay elements
+
+### **Phase 3: Web3 & NFT Features**
+- [ ] **NFT Integration**: Mint game items as NFTs
+- [ ] **Token Economics**: In-game currency and rewards
+- [ ] **Marketplace**: Trade game items and NFTs
+- [ ] **Staking System**: Earn rewards for participation
+
+### **Phase 4: Advanced Features**
+- [ ] **Seasonal Events**: Time-based challenges and rewards
+- [ ] **Guild System**: Community organization and collaboration
+- [ ] **Cross-Chain Integration**: Bridge to other blockchains
+- [ ] **Mobile App**: Native mobile application
 
 ## 📋 Prerequisites
 
@@ -38,6 +80,7 @@ Before you begin, ensure you have the following installed:
    sh -ci "$(curl -fsSL https://internetcomputer.org/install.sh)"
    ```
 3. **Git**
+4. **Unity** (for game development and builds)
 
 ## 🛠️ Setup Instructions
 
@@ -49,49 +92,35 @@ cd bloomchain-landing
 npm install
 ```
 
-### 2. Start Local ICP Replica
+### 2. Prepare Unity Game
+
+```bash
+# Copy your Unity WebGL build to the public directory
+cp -r your-unity-build/* bloomchain-landing/public/game/
+```
+
+### 3. Start Local ICP Replica
 
 ```bash
 # In the root directory
 dfx start --clean --background
 ```
 
-### 3. Deploy Canisters
+### 4. Deploy Canisters
 
 ```bash
-# Deploy all canisters (backend, frontend, and Internet Identity)
+# Use the deployment script for easier setup
+./deploy-local.sh
+
+# Or deploy manually
 dfx deploy
 ```
 
-### 4. Get Canister URLs
-
-After deployment, dfx will show you the URLs:
-
-```
-URLs:
-  Frontend canister via browser
-    bloomchain_frontend: http://127.0.0.1:4943/?canisterId=<frontend-canister-id>
-  Backend canister via Candid interface
-    bloomchain_backend: http://127.0.0.1:4943/?canisterId=<candid-ui-id>&id=<backend-canister-id>
-```
-
-### 5. Update Environment Variables
-
-Create or update `bloomchain-landing/.env`:
-
-```env
-VITE_BACKEND_CANISTER_ID=<your-backend-canister-id>
-VITE_INTERNET_IDENTITY_CANISTER_ID=rdmx6-jaaaa-aaaaa-aaadq-cai
-VITE_IC_HOST=http://localhost:4943
-VITE_DFX_NETWORK=local
-```
-
-### 6. Rebuild Frontend (if needed)
+### 5. Set Up Environment
 
 ```bash
-cd bloomchain-landing
-npm run build
-dfx deploy bloomchain_frontend
+# Load local environment variables
+source setup-env.sh local
 ```
 
 ## 🧪 Testing the Application
@@ -105,18 +134,15 @@ Open the frontend canister URL in your browser.
 3. Complete the authentication flow
 4. You should see "✓ Connected" in the navigation
 
-### 3. Test Backend Integration
-1. After logging in, scroll to the newsletter section
-2. Fill out the form with email and message
-3. Click "Send Message On-Chain"
-4. Check the browser console for confirmation
+### 3. Test Game Access
+1. **Before Login**: Game section shows "Game Locked" with login button
+2. **After Login**: Game section shows Unity game iframe
+3. **Game Controls**: Fullscreen and save progress buttons available
 
-### 4. Verify Backend Canister
-1. Open the backend Candid interface URL
-2. Try calling functions like:
-   - `greet("World")` 
-   - `getCanisterInfo()`
-   - `whoami()` (after authenticating)
+### 4. Test Profile System
+1. Click "Profile" in navigation after login
+2. View your principal ID and game stats
+3. Use logout button to return to landing page
 
 ## 🔧 Development Workflow
 
@@ -139,8 +165,54 @@ npm run dev
 cd bloomchain-landing
 npm run build
 
-# Deploy to mainnet (requires cycles)
-dfx deploy --network ic
+# Deploy to mainnet
+./deploy-mainnet.sh
+```
+
+## 🎮 Game Integration Details
+
+### **Unity Game Setup**
+- **Build Target**: WebGL
+- **Output Directory**: `bloomchain-landing/public/game/`
+- **File Structure**: Must include `index.html` and all game assets
+- **Authentication**: Game only loads for authenticated users
+
+### **Game Access Control**
+- **Unauthenticated**: See game preview with login prompt
+- **Authenticated**: Full game access with iframe embedding
+- **Profile Integration**: User progress and statistics tracking
+
+## 🔒 Security Features
+
+- **🔐 Authentication Required**: Game access protected by Internet Identity
+- **🚫 Anonymous Rejection**: Backend rejects anonymous users
+- **✅ Input Validation**: Message length and content validation
+- **🔑 Principal-based Authorization**: User identification via ICP principals
+- **🛡️ Secure Communication**: All backend calls are authenticated
+
+## 🚀 Deployment
+
+### **Local Development**
+```bash
+./deploy-local.sh
+```
+
+### **Mainnet Production**
+```bash
+# Set your identity
+export DFX_IDENTITY=your_identity_name
+
+# Deploy to mainnet
+./deploy-mainnet.sh
+```
+
+### **Environment Management**
+```bash
+# Load local environment
+source setup-env.sh local
+
+# Load mainnet environment
+source setup-env.sh mainnet
 ```
 
 ## 📊 Backend Canister Functions
@@ -158,26 +230,21 @@ The Motoko backend provides these main functions:
 
 Key components with ICP integration:
 
+- **AuthContext**: Manages Internet Identity authentication state
 - **AuthButton**: Handles II login/logout
-- **AuthContext**: Manages authentication state
-- **Navigation**: Shows connection status
+- **ProfilePage**: User profile display and management
+- **GameSection**: Unity game integration with auth protection
+- **Navigation**: Shows connection status and navigation
 - **Newsletter**: Integrated with backend for message submission
-
-## 🔒 Security Features
-
-- **Anonymous Rejection**: Backend rejects anonymous users for write operations
-- **Input Validation**: Message length and content validation
-- **Principal-based Authorization**: User identification via ICP principals
-- **Secure Communication**: All backend calls are authenticated
 
 ## 🐛 Troubleshooting
 
 ### Common Issues
 
-1. **npm not recognized**: Install Node.js and ensure it's in your PATH
-2. **dfx command not found**: Install the IC SDK
-3. **Authentication failures**: Check Internet Identity canister ID in .env
-4. **Build errors**: Ensure all dependencies are installed
+1. **Game not loading**: Ensure Unity build is in `bloomchain-landing/public/game/`
+2. **Authentication failures**: Check Internet Identity canister ID
+3. **Build errors**: Ensure all dependencies are installed
+4. **Deployment issues**: Check DFX identity and network configuration
 
 ### Getting Help
 
@@ -185,12 +252,32 @@ Key components with ICP integration:
 - Visit the [Developer Forum](https://forum.dfinity.org/)
 - Join the [Developer Discord](https://discord.gg/cA7y6ezyE2)
 
-## 🚀 Deployment to Mainnet
+## 🗺️ Roadmap
 
-1. **Get Cycles**: You'll need ICP tokens converted to cycles
-2. **Update Configuration**: Change network settings to `ic`
-3. **Deploy**: `dfx deploy --network ic`
-4. **Update Environment**: Point frontend to mainnet URLs
+### **Q1 2024** ✅
+- [x] Basic ICP dApp structure
+- [x] Internet Identity integration
+- [x] Unity game integration
+- [x] Authentication system
+- [x] Local deployment
+
+### **Q2 2024** 🚧
+- [ ] Game progress tracking
+- [ ] Player statistics
+- [ ] Basic multiplayer features
+- [ ] Mainnet deployment
+
+### **Q3 2024** 📋
+- [ ] NFT integration
+- [ ] Token economics
+- [ ] Marketplace
+- [ ] Mobile app development
+
+### **Q4 2024** 📋
+- [ ] Advanced multiplayer
+- [ ] Cross-chain features
+- [ ] Community features
+- [ ] Performance optimization
 
 ## 📄 License
 
@@ -200,6 +287,15 @@ This project is open source and available under the [MIT License](LICENSE).
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+### **Areas for Contribution**
+- Game mechanics and balance
+- UI/UX improvements
+- Smart contract development
+- Testing and documentation
+- Performance optimization
+
 ---
 
-**Built with ❤️ on the Internet Computer** 
+**Built with ❤️ on the Internet Computer**
+
+*BloomChain - Where Web3 Meets Gardening* 🌱🎮 

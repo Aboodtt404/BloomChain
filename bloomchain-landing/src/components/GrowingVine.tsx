@@ -27,20 +27,20 @@ export const GrowingVine: React.FC<GrowingVineProps> = ({
     if (animated) {
       const duration = 3000; // 3 seconds
       const startTime = Date.now();
-      
+
       const animateGrowth = () => {
         const elapsed = Date.now() - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        
+
         // Ease-out animation
         const easedProgress = 1 - Math.pow(1 - progress, 3);
         setGrowthProgress(easedProgress);
-        
+
         if (progress < 1) {
           requestAnimationFrame(animateGrowth);
         }
       };
-      
+
       requestAnimationFrame(animateGrowth);
     } else {
       setGrowthProgress(1);
@@ -57,18 +57,23 @@ export const GrowingVine: React.FC<GrowingVineProps> = ({
   }, [animated, withLeaves]);
 
   const getVinePath = () => {
+    // Safety check for length and growthProgress
+    if (!length || !growthProgress || isNaN(length) || isNaN(growthProgress)) {
+      return 'M50,50 L50,50'; // Return a safe default path
+    }
+
     const segments = 20;
     const amplitude = 5; // How much the vine curves
     let path = '';
-    
+
     for (let i = 0; i <= segments; i++) {
       const progress = i / segments;
       const currentProgress = Math.min(progress / growthProgress, 1);
-      
+
       if (currentProgress > 1) break;
-      
+
       let x, y;
-      
+
       switch (direction) {
         case 'up':
           x = 50 + Math.sin(progress * Math.PI * 3) * amplitude;
@@ -90,17 +95,28 @@ export const GrowingVine: React.FC<GrowingVineProps> = ({
           x = 50;
           y = 100 - (currentProgress * length);
       }
-      
+
+      // Safety check for x and y values
+      if (isNaN(x) || isNaN(y)) {
+        x = 50;
+        y = 50;
+      }
+
       path += i === 0 ? `M${x},${y}` : ` L${x},${y}`;
     }
-    
+
     return path;
   };
 
   const getLeafPosition = (progress: number) => {
+    // Safety check for length and progress
+    if (!length || isNaN(length) || isNaN(progress)) {
+      return { x: 50, y: 50 }; // Return safe default position
+    }
+
     const amplitude = 5;
     let x, y;
-    
+
     switch (direction) {
       case 'up':
         x = 50 + Math.sin(progress * Math.PI * 3) * amplitude;
@@ -122,7 +138,13 @@ export const GrowingVine: React.FC<GrowingVineProps> = ({
         x = 50;
         y = 100 - (progress * length);
     }
-    
+
+    // Safety check for x and y values
+    if (isNaN(x) || isNaN(y)) {
+      x = 50;
+      y = 50;
+    }
+
     return { x, y };
   };
 
@@ -147,16 +169,16 @@ export const GrowingVine: React.FC<GrowingVineProps> = ({
           strokeLinecap="round"
           className="filter drop-shadow-sm"
         />
-        
+
         {/* Leaves */}
         {withLeaves && leafPositions.map((position, index) => {
           if (position > growthProgress) return null;
-          
+
           const leafPos = getLeafPosition(position);
           const leafSize = 4 + Math.random() * 3;
           const rotation = (Math.random() - 0.5) * 60;
           const side = index % 2 === 0 ? -1 : 1;
-          
+
           return (
             <g key={index}>
               <ellipse
@@ -182,15 +204,15 @@ export const GrowingVine: React.FC<GrowingVineProps> = ({
             </g>
           );
         })}
-        
+
         {/* Small flowers along the vine */}
         {withFlowers && leafPositions.slice(0, 2).map((position, index) => {
           if (position > growthProgress) return null;
-          
+
           const flowerPos = getLeafPosition(position);
           const colors = ['#ec4899', '#f59e0b', '#8b5cf6', '#ef4444'];
           const color = colors[index % colors.length];
-          
+
           return (
             <g key={`flower-${index}`}>
               <circle
@@ -210,7 +232,7 @@ export const GrowingVine: React.FC<GrowingVineProps> = ({
             </g>
           );
         })}
-        
+
         {/* Vine tip with a small bud */}
         {growthProgress > 0.8 && (
           <circle
