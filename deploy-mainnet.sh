@@ -15,14 +15,14 @@ cd bloomchain-landing
 npm run build
 cd ..
 
-# Deploy to mainnet
-echo "🔧 Deploying canisters to mainnet..."
-dfx deploy --network mainnet
+# Deploy to mainnet (IC network)
+echo "🔧 Deploying canisters to mainnet (IC network)..."
+dfx deploy --network ic
 
 # Get canister IDs and update env file
 echo "📝 Updating environment file..."
-BACKEND_ID=$(dfx canister id bloomchain_backend --network mainnet)
-FRONTEND_ID=$(dfx canister id bloomchain_frontend --network mainnet)
+BACKEND_ID=$(dfx canister id bloomchain_backend --network ic)
+FRONTEND_ID=$(dfx canister id bloomchain_frontend --network ic)
 
 echo "CANISTER_ID_BLOOMCHAIN_BACKEND=$BACKEND_ID" > env.mainnet
 echo "CANISTER_ID_BLOOMCHAIN_FRONTEND=$FRONTEND_ID" >> env.mainnet

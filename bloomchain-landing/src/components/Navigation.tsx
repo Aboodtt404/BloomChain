@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Menu, X, Sparkles } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { AuthButton } from './AuthButton'
 import { useAuth } from '../contexts/AuthContext'
 
@@ -59,12 +59,6 @@ const Navigation: React.FC<NavigationProps> = ({ onShowProfile, currentView = 'l
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="relative">
-              <Sparkles className="w-8 h-8 text-earth-500 animate-pulse" />
-              <div className="absolute inset-0 animate-ping">
-                <Sparkles className="w-8 h-8 text-earth-500 opacity-30" />
-              </div>
-            </div>
             {currentView === 'landing' && (
               <div>
                 <h1 className="text-2xl font-bold text-gradient-green">

@@ -199,11 +199,7 @@
     }
   },
   "networks": {
-    "local": {
-      "bind": "127.0.0.1:4943",
-      "type": "ephemeral"
-    },
-    "mainnet": {
+    "ic": {
       "type": "persistent"
     }
   },
@@ -214,5 +210,6 @@
     }
   },
   "output_env_file": ".env",
-  "version": 1
+  "version": 1,
+  "dfx": "0.28.0"
 }
