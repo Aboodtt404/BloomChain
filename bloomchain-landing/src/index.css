@@ -7,13 +7,13 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-}
+  }
 
-body {
+  body {
     @apply bg-gray-900 text-white font-sans antialiased;
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  min-height: 100vh;
-}
+    min-height: 100vh;
+  }
 
   * {
     @apply border-gray-700;
@@ -22,32 +22,24 @@ body {
 
 @layer components {
   .btn-primary {
-    @apply bg-gradient-to-r from-earth-600 to-earth-700 hover:from-earth-700 hover:to-earth-800 
-           text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 
-           shadow-lg hover:shadow-glow-green transform hover:scale-105;
-}
+    @apply bg-gradient-to-r from-earth-600 to-earth-700 hover:from-earth-700 hover:to-earth-800 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-glow-green transform hover:scale-105;
+  }
 
   .btn-secondary {
-    @apply bg-gradient-to-r from-web3-600 to-web3-700 hover:from-web3-700 hover:to-web3-800 
-           text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 
-           shadow-lg hover:shadow-glow-blue transform hover:scale-105;
+    @apply bg-gradient-to-r from-web3-600 to-web3-700 hover:from-web3-700 hover:to-web3-800 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-glow-blue transform hover:scale-105;
   }
 
   .btn-golden {
-    @apply bg-gradient-to-r from-golden-500 to-golden-600 hover:from-golden-600 hover:to-golden-700 
-           text-gray-900 font-bold py-3 px-8 rounded-full transition-all duration-300 
-           shadow-lg hover:shadow-glow-gold transform hover:scale-105;
+    @apply bg-gradient-to-r from-golden-500 to-golden-600 hover:from-golden-600 hover:to-golden-700 text-gray-900 font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-glow-gold transform hover:scale-105;
   }
 
   .card-glow {
-    @apply bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6 
-           transition-all duration-300 hover:bg-gray-800/70 hover:border-earth-600/50 
-           hover:shadow-glow-green/30;
-}
+    @apply bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6 transition-all duration-300 hover:bg-gray-800/70 hover:border-earth-600/50 hover:shadow-glow-green/30;
+  }
 
   .text-gradient-green {
     @apply bg-gradient-to-r from-earth-400 to-earth-600 bg-clip-text text-transparent;
-}
+  }
 
   .text-gradient-gold {
     @apply bg-gradient-to-r from-golden-400 to-golden-600 bg-clip-text text-transparent;
@@ -55,6 +47,10 @@ body {
 
   .text-gradient-blue {
     @apply bg-gradient-to-r from-web3-400 to-web3-600 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-web3 {
+    @apply bg-gradient-to-r from-blue-400 to-cyan-600 bg-clip-text text-transparent;
   }
 
   /* Garden-themed components */
@@ -82,6 +78,43 @@ body {
   .garden-sparkle {
     animation: gardenSparkle 2s ease-in-out infinite;
   }
+
+  /* Unity Game Integration Styles */
+  #unity-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  #unity-canvas {
+    width: 100% !important;
+    height: 100% !important;
+    background: #231F20;
+    border-radius: 1rem;
+  }
+
+  #unity-loading-bar {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+
+  #unity-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 1rem 1rem;
+  }
+
+  .unity-mobile #unity-canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
 }
 
 @layer utilities {
@@ -108,10 +141,12 @@ body {
     transform: scale(0.3) rotate(-10deg);
     opacity: 0;
   }
+
   50% {
     transform: scale(1.1) rotate(5deg);
     opacity: 0.8;
   }
+
   100% {
     transform: scale(1) rotate(0deg);
     opacity: 1;
@@ -123,9 +158,11 @@ body {
     stroke-dasharray: 0 1000;
     opacity: 0;
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     stroke-dasharray: 1000 0;
     opacity: 1;
@@ -133,19 +170,25 @@ body {
 }
 
 @keyframes petalSway {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: rotate(-2deg);
   }
+
   50% {
     transform: rotate(2deg);
   }
 }
 
 @keyframes gardenSparkle {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.3;
     transform: scale(0.8);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.2);
@@ -157,6 +200,7 @@ body {
     opacity: 1;
     transform: translateY(0px) rotate(0deg);
   }
+
   100% {
     opacity: 0;
     transform: translateY(-100px) rotate(360deg);
@@ -194,7 +238,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
   @apply bg-earth-600 rounded-full;
-  }
+}
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-earth-500;

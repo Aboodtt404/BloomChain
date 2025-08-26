@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Zap, Clock, Star } from 'lucide-react'
+import { Grid, Star, Droplets, Fish, Package, Coins } from 'lucide-react'
 
 const GameMechanics: React.FC = () => {
   return (
@@ -8,16 +8,16 @@ const GameMechanics: React.FC = () => {
         <div className="text-center space-y-4 mb-16">
           <div className="inline-flex items-center space-x-2 bg-web3-500/20 border border-web3-500/30 rounded-full px-4 py-2 text-sm font-medium text-web3-300">
             <Grid className="w-4 h-4" />
-            <span>Gameplay Mechanics</span>
+            <span>MVP Gameplay - August 2025</span>
           </div>
-          
+
           <h2 className="text-4xl lg:text-5xl font-bold">
-            <span className="text-gradient-web3">Simple to Learn,</span>{' '}
-            <span className="text-white">Deep to Master</span>
+            <span className="text-gradient-web3">Core Mechanics</span>{' '}
+            <span className="text-white">Ready to Play</span>
           </h2>
-          
+
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            BloomChain combines familiar farming mechanics with innovative puzzle-solving and strategic depth.
+            Experience the foundation of BloomChain with these fully implemented gameplay systems. More advanced mechanics coming in future updates!
           </p>
         </div>
 
@@ -29,20 +29,19 @@ const GameMechanics: React.FC = () => {
                 {Array.from({ length: 16 }, (_, i) => (
                   <div
                     key={i}
-                    className={`aspect-square rounded-lg border-2 flex items-center justify-center text-2xl ${
-                      [2, 5, 9, 14].includes(i)
-                        ? 'bg-earth-500/20 border-earth-500/40 text-earth-400'
-                        : [7, 10].includes(i)
+                    className={`aspect-square rounded-lg border-2 flex items-center justify-center text-2xl ${[2, 5, 9, 14].includes(i)
+                      ? 'bg-earth-500/20 border-earth-500/40 text-earth-400'
+                      : [7, 10].includes(i)
                         ? 'bg-web3-500/20 border-web3-500/40 text-web3-400'
                         : 'bg-gray-700/50 border-gray-600'
-                    }`}
+                      }`}
                   >
                     {[2, 5, 9, 14].includes(i) ? '🌱' : [7, 10].includes(i) ? '💧' : ''}
                   </div>
                 ))}
               </div>
               <div className="absolute -top-4 -right-4 bg-golden-500/20 border border-golden-500/30 rounded-full px-3 py-1 text-sm font-semibold text-golden-300">
-                4x4 Garden Grid
+                Garden Grid System
               </div>
             </div>
 
@@ -52,12 +51,12 @@ const GameMechanics: React.FC = () => {
                 <div className="text-sm text-gray-400">Plot Capacity</div>
               </div>
               <div className="space-y-2">
-                <div className="text-2xl font-bold text-web3-400">2hr</div>
-                <div className="text-sm text-gray-400">Growth Cycles</div>
+                <div className="text-2xl font-bold text-web3-400">Multiple</div>
+                <div className="text-sm text-gray-400">Seed Types</div>
               </div>
               <div className="space-y-2">
-                <div className="text-2xl font-bold text-golden-400">50</div>
-                <div className="text-sm text-gray-400">Gems/Day</div>
+                <div className="text-2xl font-bold text-golden-400">Coins</div>
+                <div className="text-sm text-gray-400">Economy</div>
               </div>
             </div>
           </div>
@@ -70,48 +69,94 @@ const GameMechanics: React.FC = () => {
                   <Grid className="w-6 h-6 text-earth-400" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Garden Management</h3>
+                  <h3 className="text-xl font-semibold text-white mb-2">Multi-Type Seed System</h3>
                   <p className="text-gray-400">
-                    Plant magical crops in your 4x4 garden grid. Each tile can hold different crop types with unique growth patterns and rewards.
+                    Plant various seed types with different growth rates and crop values. Each seed has unique characteristics and strategic pricing.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-web3-500/20 rounded-xl flex items-center justify-center">
-                  <Zap className="w-6 h-6 text-web3-400" />
+                  <Droplets className="w-6 h-6 text-web3-400" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Mutation Matrix Puzzles</h3>
+                  <h3 className="text-xl font-semibold text-white mb-2">Water Management</h3>
                   <p className="text-gray-400">
-                    Solve strategic sprinkler placement puzzles to optimize crop growth and unlock rare mutations.
+                    Water your plants strategically to maintain optimal growth rates. Monitor water levels and timing for maximum crop yields.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-golden-500/20 rounded-xl flex items-center justify-center">
-                  <Clock className="w-6 h-6 text-golden-400" />
+                  <Package className="w-6 h-6 text-golden-400" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Offline Growth</h3>
+                  <h3 className="text-xl font-semibold text-white mb-2">Inventory Management</h3>
                   <p className="text-gray-400">
-                    Your garden continues growing while you're away. Return every 2 hours to harvest gems and plant new crops.
+                    Organize your seeds, tools, and items in a comprehensive inventory system. Track resources and equipment efficiently.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-accent-500/20 rounded-xl flex items-center justify-center">
-                  <Star className="w-6 h-6 text-accent-400" />
+                  <Fish className="w-6 h-6 text-accent-400" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Star Bloom Events</h3>
+                  <h3 className="text-xl font-semibold text-white mb-2">Fishing Minigames</h3>
                   <p className="text-gray-400">
-                    Join weekly community events with your collective to earn exclusive rewards and rare NFTs.
+                    Catch different fish types with varying difficulty levels. Each fish has unique selling points and contributes to your economy.
                   </p>
                 </div>
               </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-earth-500/20 rounded-xl flex items-center justify-center">
+                  <Coins className="w-6 h-6 text-earth-400" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-2">Merchant Trading</h3>
+                  <p className="text-gray-400">
+                    Call merchants to your island for trading. Expand your island, buy seeds, and sell crops, fish, and other products.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Future Mechanics Preview */}
+        <div className="mt-20 text-center">
+          <div className="inline-flex items-center space-x-2 bg-golden-500/20 border border-golden-500/30 rounded-full px-4 py-2 text-sm font-medium text-golden-300 mb-6">
+            <Star className="w-4 h-4" />
+            <span>Coming Soon</span>
+          </div>
+
+          <h3 className="text-2xl font-bold text-white mb-4">
+            Advanced Gameplay Mechanics
+          </h3>
+
+          <p className="text-gray-400 max-w-2xl mx-auto mb-8">
+            After the MVP launch, we'll be adding puzzle mechanics, mutation systems, competitive events, and more advanced farming strategies.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="text-center p-6 bg-gray-800/50 rounded-xl border border-gray-700">
+              <div className="text-3xl mb-4">🧩</div>
+              <h4 className="text-lg font-semibold text-white mb-2">Puzzle Mechanics</h4>
+              <p className="text-gray-400 text-sm">Strategic sprinkler placement and growth optimization puzzles</p>
+            </div>
+            <div className="text-center p-6 bg-gray-800/50 rounded-xl border border-gray-700">
+              <div className="text-3xl mb-4">⚡</div>
+              <h4 className="text-lg font-semibold text-white mb-2">Mutation System</h4>
+              <p className="text-gray-400 text-sm">Rare crop mutations and special growth patterns</p>
+            </div>
+            <div className="text-center p-6 bg-gray-800/50 rounded-xl border border-gray-700">
+              <div className="text-3xl mb-4">🏆</div>
+              <h4 className="text-lg font-semibold text-white mb-2">Competitive Events</h4>
+              <p className="text-gray-400 text-sm">Seasonal competitions and community challenges</p>
             </div>
           </div>
         </div>

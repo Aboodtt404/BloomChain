@@ -1,47 +1,70 @@
 import React from 'react'
-import { Calendar, CheckCircle, Clock, Zap } from 'lucide-react'
+import { Calendar, CheckCircle, Clock, Zap, Star } from 'lucide-react'
 
 const Roadmap: React.FC = () => {
   const roadmapItems = [
     {
       quarter: 'August 2025',
-      title: 'MVP Development',
-      status: 'in-progress',
+      title: 'MVP Launch',
+      status: 'completed',
       items: [
-        '4x4 Garden Grid System',
-        'Basic NFT Crop Minting',
-        'Core Game Mechanics',
-        'User Interface Development'
-      ]
+        'Multi-Type Seed System',
+        'Water Management System',
+        'Comprehensive Inventory',
+        'Fishing Minigames',
+        'Merchant Trading System',
+        'Coin Economy'
+      ],
+      description: 'Core gameplay features fully implemented and ready for players'
     },
     {
       quarter: 'September 2025',
-      title: 'Beta Launch',
-      status: 'planned',
+      title: 'Enhanced Gameplay',
+      status: 'in-progress',
       items: [
-        'Play-to-Earn System',
+        'Advanced Crop Mutations',
         'Puzzle Mechanics',
-        'ICP Token Integration',
-        'Community Testing'
-      ]
+        'Seasonal Events',
+        'Player Achievements',
+        'Social Features',
+        'Performance Optimization'
+      ],
+      description: 'Expanding the core experience with advanced mechanics and social elements'
     },
     {
       quarter: 'October 2025',
-      title: 'Public Release',
+      title: 'Web3 Integration',
       status: 'planned',
       items: [
-        'Full Game Launch',
-        'NFT Marketplace',
-        'DAO Implementation',
-        'Performance Optimization'
-      ]
+        'NFT Ownership System',
+        'ICP Token Integration',
+        'DAO Governance',
+        'Marketplace Launch',
+        'Staking Mechanisms',
+        'Cross-Chain Features'
+      ],
+      description: 'Full blockchain integration and community governance implementation'
+    },
+    {
+      quarter: 'Q4 2025',
+      title: 'Ecosystem Expansion',
+      status: 'planned',
+      items: [
+        'Mobile App Launch',
+        'Competitive Tournaments',
+        'Creator Tools',
+        'API for Developers',
+        'Partnership Integrations',
+        'Global Expansion'
+      ],
+      description: 'Growing beyond gaming into a comprehensive Web3 ecosystem'
     }
   ]
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed':
-        return 'text-earth-400 bg-earth-500/20 border-earth-500/30'
+        return 'text-green-400 bg-green-500/20 border-green-500/30'
       case 'in-progress':
         return 'text-golden-400 bg-golden-500/20 border-golden-500/30'
       case 'planned':
@@ -72,20 +95,36 @@ const Roadmap: React.FC = () => {
             <Calendar className="w-4 h-4" />
             <span>Development Roadmap</span>
           </div>
-          
+
           <h2 className="text-4xl lg:text-5xl font-bold">
-            <span className="text-gradient-gold">The Journey</span>{' '}
-            <span className="text-white">Ahead</span>
+            <span className="text-gradient-gold">From MVP to</span>{' '}
+            <span className="text-white">Full Ecosystem</span>
           </h2>
-          
+
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Our roadmap to revolutionizing Web3 gaming and expanding into a full ecosystem.
+            Our journey from core gameplay to a comprehensive Web3 gaming ecosystem.
+          </p>
+        </div>
+
+        {/* MVP Achievement Banner */}
+        <div className="mb-16 text-center">
+          <div className="inline-flex items-center space-x-2 bg-green-500/20 border border-green-500/30 rounded-2xl px-6 py-4 text-green-300 mb-6">
+            <Star className="w-5 h-5" />
+            <span className="font-semibold">🎉 MVP Successfully Completed! 🎉</span>
+          </div>
+
+          <h3 className="text-2xl font-bold text-white mb-4">
+            Core Gameplay Ready for Players
+          </h3>
+
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            All six core features have been implemented and tested. Players can now experience the full foundation of BloomChain with farming, fishing, trading, and inventory management.
           </p>
         </div>
 
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-golden-400 via-earth-400 to-web3-400 hidden lg:block" />
+          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-green-400 via-golden-400 to-web3-400 hidden lg:block" />
 
           <div className="space-y-12">
             {roadmapItems.map((item, index) => (
@@ -98,24 +137,56 @@ const Roadmap: React.FC = () => {
                 {/* Content Card */}
                 <div className="flex-1 lg:ml-0 ml-0">
                   <div className={`border rounded-2xl p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 ${getStatusColor(item.status).replace('text-', 'border-').replace('/20', '/30')}`}>
+                    {/* Header */}
                     <div className="flex items-center justify-between mb-6">
-                      <div>
-                        <div className={`inline-flex items-center space-x-2 rounded-full px-3 py-1 text-sm font-semibold border ${getStatusColor(item.status)}`}>
-                          {getStatusIcon(item.status)}
-                          <span>{item.quarter}</span>
+                      <div className="flex items-center space-x-3">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${getStatusColor(item.status).split(' ')[1]}`}>
+                          <div className={getStatusColor(item.status).split(' ')[0]}>
+                            {getStatusIcon(item.status)}
+                          </div>
                         </div>
-                        <h3 className="text-2xl font-bold text-white mt-3">{item.title}</h3>
+                        <div>
+                          <div className="text-sm font-medium text-gray-400">{item.quarter}</div>
+                          <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                        </div>
+                      </div>
+
+                      {/* Status Badge */}
+                      <div className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(item.status)}`}>
+                        {item.status === 'completed' ? '✓ Completed' :
+                          item.status === 'in-progress' ? '⚡ In Progress' :
+                            '🕐 Planned'}
                       </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-4">
+                    {/* Description */}
+                    <p className="text-gray-400 mb-6">{item.description}</p>
+
+                    {/* Feature List */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {item.items.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-center space-x-3">
-                          <div className={`w-2 h-2 rounded-full ${getStatusColor(item.status).split(' ')[1]}`} />
-                          <span className="text-gray-300">{feature}</span>
+                          <div className={`w-2 h-2 rounded-full ${item.status === 'completed' ? 'bg-green-400' :
+                              item.status === 'in-progress' ? 'bg-golden-400' :
+                                'bg-web3-400'
+                            }`} />
+                          <span className="text-gray-300 text-sm">{feature}</span>
                         </div>
                       ))}
                     </div>
+
+                    {/* Progress Indicator for In-Progress */}
+                    {item.status === 'in-progress' && (
+                      <div className="mt-6">
+                        <div className="flex items-center justify-between text-sm text-gray-400 mb-2">
+                          <span>Development Progress</span>
+                          <span>25%</span>
+                        </div>
+                        <div className="w-full bg-gray-700 rounded-full h-2">
+                          <div className="bg-golden-400 h-2 rounded-full" style={{ width: '25%' }}></div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -123,25 +194,27 @@ const Roadmap: React.FC = () => {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center mt-16 space-y-6">
-          <h3 className="text-2xl font-bold text-white">
-            Be part of the journey
-          </h3>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Join our wishlist to get early access to BloomChain. DAO governance will be available 
-            at launch, allowing BCT holders to shape the future of the game.
+        {/* Bottom CTA */}
+        <div className="text-center mt-16">
+          <div className="inline-flex items-center space-x-2 bg-web3-500/20 border border-web3-500/30 rounded-full px-4 py-2 text-sm font-medium text-web3-300 mb-6">
+            <Zap className="w-4 h-4" />
+            <span>Ready to Experience the MVP?</span>
+          </div>
+
+          <p className="text-gray-400 max-w-2xl mx-auto mb-8">
+            The core BloomChain experience is ready for players. Join our community and be part of the journey as we expand into advanced features and Web3 integration.
           </p>
-          <button 
+
+          <button
             onClick={() => {
               const element = document.querySelector('#newsletter')
               if (element) {
                 element.scrollIntoView({ behavior: 'smooth' })
               }
             }}
-            className="btn-golden"
+            className="btn-primary text-lg px-8 py-4"
           >
-            Join Wishlist
+            Join the Waitlist
           </button>
         </div>
       </div>

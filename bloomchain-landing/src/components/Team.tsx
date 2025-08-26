@@ -11,15 +11,15 @@ const Team: React.FC = () => {
       icon: <Code className="w-8 h-8" />,
       color: 'earth',
       social: {
-        github: 'https://github.com/Kidzantso',
-        linkedin: 'https://www.linkedin.com/in/nader-maged/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
+        github: 'https://github.com/OmarAliAmer',
+        linkedin: 'https://www.linkedin.com/feed/'
       }
     },
     {
-      name: 'ICP Blockchain Pro',
-      role: 'Blockchain Developer & Smart Contracts',
-      description: 'Internet Computer Protocol specialist with deep expertise in Rust, Motoko, and decentralized systems. Architecting the Web3 infrastructure for BloomChain.',
-      skills: ['Rust', 'Motoko', 'ICP Canisters', 'Smart Contracts', 'Web3'],
+      name: 'ICP & Unity Developer',
+      role: 'Blockchain Developer & Unity Integration',
+      description: 'Internet Computer Protocol specialist with deep expertise in Rust, Motoko, and Unity development. Architecting the Web3 infrastructure and Unity integration for BloomChain.',
+      skills: ['Rust', 'Motoko', 'ICP Canisters', 'Unity Development', 'Web3'],
       icon: <Cpu className="w-8 h-8" />,
       color: 'web3',
       social: {
@@ -63,14 +63,14 @@ const Team: React.FC = () => {
             <Code className="w-4 h-4" />
             <span>Meet the Team</span>
           </div>
-          
+
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-gradient-green">Two Developers,</span>{' '}
             <span className="text-white">One Vision</span>
           </h2>
-          
+
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            BloomChain is built by a passionate duo combining gaming expertise with cutting-edge blockchain technology. 
+            BloomChain is built by a passionate duo combining gaming expertise with cutting-edge blockchain technology.
             Together, we're pioneering the future of Web3 gaming.
           </p>
         </div>
@@ -78,7 +78,7 @@ const Team: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-12 mb-16">
           {teamMembers.map((member, index) => {
             const colors = getColorClasses(member.color)
-            
+
             return (
               <div
                 key={index}
@@ -175,8 +175,8 @@ const Team: React.FC = () => {
             Our Mission: Democratize Gaming
           </h3>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-            We believe gaming should be truly owned by players, not corporations. 
-            BloomChain represents our commitment to creating a gaming ecosystem where 
+            We believe gaming should be truly owned by players, not corporations.
+            BloomChain represents our commitment to creating a gaming ecosystem where
             players have real ownership, voice, and economic opportunity.
           </p>
         </div>

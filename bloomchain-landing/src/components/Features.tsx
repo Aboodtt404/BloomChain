@@ -1,49 +1,55 @@
 import React from 'react'
-import { Sparkles, Coins, Users, Puzzle, Clock, Trophy } from 'lucide-react'
+import { Sparkles, Coins, Clock, Trophy, Fish, Droplets, Package } from 'lucide-react'
 
 const Features: React.FC = () => {
   const features = [
     {
       icon: <Sparkles className="w-8 h-8" />,
-      title: "NFT Crops & Gardens",
-      description: "True ownership of your digital assets. Every crop, sprinkler, and garden plot is a unique NFT you can trade on the marketplace.",
+      title: "Multi-Type Seed System",
+      description: "Plant various seed types with different growth rates and crop values. Each seed has unique characteristics and pricing for strategic farming.",
       color: "earth",
-      stats: "1000+ Unique NFTs"
+      stats: "MVP Ready",
+      status: "implemented"
+    },
+    {
+      icon: <Droplets className="w-8 h-8" />,
+      title: "Water Management System",
+      description: "Water your plants strategically to maintain optimal growth rates. Monitor water levels and timing for maximum crop yields.",
+      color: "web3",
+      stats: "MVP Ready",
+      status: "implemented"
+    },
+    {
+      icon: <Package className="w-8 h-8" />,
+      title: "Comprehensive Inventory",
+      description: "Manage your seeds, tools, and items in a well-organized inventory system. Track your resources and equipment efficiently.",
+      color: "golden",
+      stats: "MVP Ready",
+      status: "implemented"
+    },
+    {
+      icon: <Fish className="w-8 h-8" />,
+      title: "Fishing Minigames",
+      description: "Catch different fish types with varying difficulty levels. Each fish has unique selling points and contributes to your economy.",
+      color: "accent",
+      stats: "MVP Ready",
+      status: "implemented"
     },
     {
       icon: <Coins className="w-8 h-8" />,
-      title: "Play-to-Earn Economy", 
-      description: "Earn real ICP tokens by playing. Convert gems to cryptocurrency, stake BCT tokens, and participate in a sustainable economy.",
+      title: "Merchant Trading System",
+      description: "Call merchants to your island for trading. Expand your island, buy seeds, and sell crops, fish, and other products.",
       color: "golden",
-      stats: "$0.50-$125/week"
-    },
-    {
-      icon: <Puzzle className="w-8 h-8" />,
-      title: "Strategic Puzzles",
-      description: "Solve Mutation Matrix puzzles and Growth Sequences to optimize your garden. Smart play leads to better rewards.",
-      color: "web3",
-      stats: "50+ Puzzle Types"
-    },
-    {
-      icon: <Users className="w-8 h-8" />,
-      title: "DAO Governance",
-      description: "Coming at launch! Vote on game updates, new features, and community events using BCT tokens. Your voice will shape the future of BloomChain.",
-      color: "accent",
-      stats: "Community Driven"
-    },
-    {
-      icon: <Clock className="w-8 h-8" />,
-      title: "Offline Growth",
-      description: "Your garden grows even when you're away. Check back every 2 hours to harvest gems and tend to your magical crops.",
-      color: "earth",
-      stats: "24/7 Growing"
+      stats: "MVP Ready",
+      status: "implemented"
     },
     {
       icon: <Trophy className="w-8 h-8" />,
-      title: "Competitive Events",
-      description: "Join seasonal events like Star Bloom Festival with your collective. Compete for exclusive rewards and recognition.",
-      color: "golden",
-      stats: "Weekly Events"
+      title: "Coin Economy",
+      description: "Earn and spend coins through farming, fishing, and trading. Build your wealth to expand your island and purchase upgrades.",
+      color: "earth",
+      stats: "MVP Ready",
+      status: "implemented"
     }
   ]
 
@@ -94,104 +100,99 @@ const Features: React.FC = () => {
         <div className="text-center space-y-4 mb-16">
           <div className="inline-flex items-center space-x-2 bg-earth-500/20 border border-earth-500/30 rounded-full px-4 py-2 text-sm font-medium text-earth-300">
             <Sparkles className="w-4 h-4" />
-            <span>Game Features</span>
+            <span>MVP Features - August 2025</span>
           </div>
-          
+
           <h2 className="text-4xl lg:text-5xl font-bold">
-            <span className="text-gradient-green">Revolutionary</span>{' '}
-            <span className="text-white">Gaming Experience</span>
+            <span className="text-gradient-earth">Core Gameplay</span>{' '}
+            <span className="text-white">Ready to Play</span>
           </h2>
-          
+
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            BloomChain combines the best of traditional gaming with cutting-edge Web3 technology, 
-            creating an entirely new way to play, earn, and own your digital adventures.
+            Experience the foundation of BloomChain with these fully implemented features. More advanced features coming in future updates!
           </p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {features.map((feature, index) => {
             const colors = getColorClasses(feature.color)
-            
             return (
               <div
                 key={index}
-                className={`
-                  relative bg-gradient-to-br ${colors.bg} 
-                  border ${colors.border} ${colors.hover}
-                  rounded-2xl p-8 transition-all duration-300 
-                  hover:scale-105 hover:shadow-2xl
-                  backdrop-blur-sm
-                  group cursor-pointer
-                `}
+                className={`group relative p-8 rounded-2xl border-2 transition-all duration-300 ${colors.bg} ${colors.border} ${colors.hover}`}
               >
-                {/* Background Pattern */}
-                <div className="absolute inset-0 opacity-5">
-                  <div className="absolute top-4 right-4 w-32 h-32 rounded-full bg-current blur-3xl" />
-                  <div className="absolute bottom-4 left-4 w-24 h-24 rounded-full bg-current blur-2xl" />
+                {/* Status Badge */}
+                <div className="absolute -top-3 -right-3">
+                  <div className={`px-3 py-1 rounded-full text-xs font-semibold ${feature.status === 'implemented'
+                    ? 'bg-green-500/20 border border-green-500/30 text-green-300'
+                    : 'bg-blue-500/20 border border-blue-500/30 text-blue-300'
+                    }`}>
+                    {feature.status === 'implemented' ? '✓ Ready' : 'Coming Soon'}
+                  </div>
+                </div>
+
+                {/* Icon */}
+                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${colors.bg} border ${colors.border} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <div className={colors.icon}>
+                    {feature.icon}
+                  </div>
                 </div>
 
                 {/* Content */}
-                <div className="relative space-y-4">
-                  {/* Icon */}
-                  <div className={`${colors.icon} group-hover:scale-110 transition-transform duration-300`}>
-                    {feature.icon}
+                <h3 className="text-2xl font-bold text-white mb-4">{feature.title}</h3>
+                <p className="text-gray-400 mb-6 leading-relaxed">{feature.description}</p>
+
+                {/* Stats */}
+                <div className="flex items-center justify-between">
+                  <div className={`text-sm font-semibold ${colors.icon}`}>
+                    {feature.stats}
                   </div>
-
-                  {/* Title */}
-                  <h3 className="text-xl font-semibold text-white group-hover:text-gray-100">
-                    {feature.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-gray-400 leading-relaxed">
-                    {feature.description}
-                  </p>
-
-                  {/* Stats */}
-                  <div className={`inline-flex items-center space-x-2 ${colors.icon} text-sm font-semibold`}>
-                    <div className="w-2 h-2 rounded-full bg-current animate-pulse" />
-                    <span>{feature.stats}</span>
-                  </div>
+                  {feature.status === 'implemented' && (
+                    <div className="flex items-center space-x-1 text-green-400">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <span className="text-xs">Live</span>
+                    </div>
+                  )}
                 </div>
-
-                {/* Hover Effect */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
             )
           })}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="text-center mt-16">
-          <div className="inline-flex flex-col sm:flex-row gap-4">
-            <button 
-              onClick={() => {
-                const element = document.querySelector('#newsletter')
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' })
-                }
-              }}
-              className="btn-primary text-lg px-8 py-4"
-            >
-              Join Wishlist
-            </button>
-            <button 
-              onClick={() => {
-                const element = document.querySelector('#gameplay')
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' })
-                }
-              }}
-              className="btn-secondary text-lg px-8 py-4"
-            >
-              Learn More
-            </button>
+        {/* Coming Soon Section */}
+        <div className="mt-20 text-center">
+          <div className="inline-flex items-center space-x-2 bg-web3-500/20 border border-web3-500/30 rounded-full px-4 py-2 text-sm font-medium text-web3-300 mb-6">
+            <Clock className="w-4 h-4" />
+            <span>Future Updates</span>
           </div>
-          
-          <p className="text-sm text-gray-500 mt-4">
-            No downloads required • Play in your browser • Built on Internet Computer Protocol
+
+          <h3 className="text-2xl font-bold text-white mb-4">
+            Advanced Features in Development
+          </h3>
+
+          <p className="text-gray-400 max-w-2xl mx-auto mb-8">
+            After the MVP launch, we'll be adding NFT ownership, puzzle mechanics, DAO governance, and competitive events to expand the BloomChain experience.
           </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+            <div className="text-center p-4 bg-gray-800/50 rounded-lg border border-gray-700">
+              <div className="text-2xl mb-2">🎮</div>
+              <div className="text-sm text-gray-400">Puzzle Mechanics</div>
+            </div>
+            <div className="text-center p-4 bg-gray-800/50 rounded-lg border border-gray-700">
+              <div className="text-2xl mb-2">🏛️</div>
+              <div className="text-sm text-gray-400">DAO Governance</div>
+            </div>
+            <div className="text-center p-4 bg-gray-800/50 rounded-lg border border-gray-700">
+              <div className="text-2xl mb-2">🏆</div>
+              <div className="text-sm text-gray-400">Competitive Events</div>
+            </div>
+            <div className="text-center p-4 bg-gray-800/50 rounded-lg border border-gray-700">
+              <div className="text-2xl mb-2">💎</div>
+              <div className="text-sm text-gray-400">NFT Ownership</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -5,10 +5,193 @@
       "type": "motoko"
     },
     "bloomchain_frontend": {
-      "dependencies": ["bloomchain_backend"],
-      "source": ["bloomchain-landing/dist"],
+      "dependencies": [
+        "bloomchain_backend"
+      ],
+      "source": [
+        "bloomchain-landing/dist"
+      ],
       "type": "assets",
-      "workspace": "bloomchain-landing"
+      "workspace": "bloomchain-landing",
+      "headers": [
+        {
+          "match": "**/*.js",
+          "headers": {
+            "Content-Type": "application/javascript"
+          }
+        },
+        {
+          "match": "**/*.wasm",
+          "headers": {
+            "Content-Type": "application/wasm"
+          }
+        },
+        {
+          "match": "**/*.data",
+          "headers": {
+            "Content-Type": "application/octet-stream"
+          }
+        },
+        {
+          "match": "**/*.framework.js",
+          "headers": {
+            "Content-Type": "application/javascript"
+          }
+        },
+        {
+          "match": "**/*.loader.js",
+          "headers": {
+            "Content-Type": "application/javascript"
+          }
+        },
+        {
+          "match": "**/*.html",
+          "headers": {
+            "Content-Type": "text/html"
+          }
+        },
+        {
+          "match": "**/*.css",
+          "headers": {
+            "Content-Type": "text/css"
+          }
+        },
+        {
+          "match": "**/*.png",
+          "headers": {
+            "Content-Type": "image/png"
+          }
+        },
+        {
+          "match": "**/*.jpg",
+          "headers": {
+            "Content-Type": "image/jpeg"
+          }
+        },
+        {
+          "match": "**/*.jpeg",
+          "headers": {
+            "Content-Type": "image/jpeg"
+          }
+        },
+        {
+          "match": "**/*.gif",
+          "headers": {
+            "Content-Type": "image/gif"
+          }
+        },
+        {
+          "match": "**/*.svg",
+          "headers": {
+            "Content-Type": "image/svg+xml"
+          }
+        },
+        {
+          "match": "**/*.ico",
+          "headers": {
+            "Content-Type": "image/x-icon"
+          }
+        },
+        {
+          "match": "**/*.ttf",
+          "headers": {
+            "Content-Type": "font/ttf"
+          }
+        },
+        {
+          "match": "**/*.woff",
+          "headers": {
+            "Content-Type": "font/woff"
+          }
+        },
+        {
+          "match": "**/*.woff2",
+          "headers": {
+            "Content-Type": "font/woff2"
+          }
+        },
+        {
+          "match": "**/*.eot",
+          "headers": {
+            "Content-Type": "application/vnd.ms-fontobject"
+          }
+        },
+        {
+          "match": "**/*.otf",
+          "headers": {
+            "Content-Type": "font/otf"
+          }
+        },
+        {
+          "match": "**/*.json",
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        },
+        {
+          "match": "**/*.xml",
+          "headers": {
+            "Content-Type": "application/xml"
+          }
+        },
+        {
+          "match": "**/*.txt",
+          "headers": {
+            "Content-Type": "text/plain"
+          }
+        },
+        {
+          "match": "**/*.mp3",
+          "headers": {
+            "Content-Type": "audio/mpeg"
+          }
+        },
+        {
+          "match": "**/*.ogg",
+          "headers": {
+            "Content-Type": "audio/ogg"
+          }
+        },
+        {
+          "match": "**/*.wav",
+          "headers": {
+            "Content-Type": "audio/wav"
+          }
+        },
+        {
+          "match": "**/*.mp4",
+          "headers": {
+            "Content-Type": "video/mp4"
+          }
+        },
+        {
+          "match": "**/*.webm",
+          "headers": {
+            "Content-Type": "video/webm"
+          }
+        },
+        {
+          "match": "**/*.webp",
+          "headers": {
+            "Content-Type": "image/webp"
+          }
+        },
+        {
+          "match": "**/*.br",
+          "headers": {
+            "Content-Type": "application/octet-stream",
+            "Content-Encoding": "br"
+          }
+        },
+        {
+          "match": "**/*.gz",
+          "headers": {
+            "Content-Type": "application/octet-stream",
+            "Content-Encoding": "gzip"
+          }
+        }
+      ],
+      "gzip": true
     },
     "internet_identity": {
       "type": "pull",
@@ -29,4 +212,4 @@
   },
   "output_env_file": ".env",
   "version": 1
-} 
+}
